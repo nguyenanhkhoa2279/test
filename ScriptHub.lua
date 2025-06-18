@@ -138,7 +138,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Dis = Window:AddTab({ Title = "Tab Discord", Icon = "" }),
     Main = Window:AddTab({ Title = "Tab NazuX Hub", Icon = "" }),
-    Paid = Window:AddTab({ Title = "Tab Paid Free", Icon = "" }),
+    Paid = Window:AddTab({ Title = "Tab Banana Free", Icon = "" }),
     Lonely = Window:AddTab({ Title = "Tab Lonely Hub", Icon = "" }),
     Client = Window:AddTab({ Title = "Tab Executor", Icon = "" }),
     Dev = Window:AddTab({ Title = "Tab Developer", Icon = "" }),
@@ -146,8 +146,7 @@ local Tabs = {
     BF = Window:AddTab({ Title = "Tab Blox Fruits", Icon = "" }),
     King = Window:AddTab({ Title = "Tab King Legacy", Icon = "" }),
     Kai = Window:AddTab({ Title = "Tab Kaitun", Icon = "" }),
-    MM2 = Window:AddTab({Title = "Tab Murder Mystery 2", Icon = ""}),
-    Evade = Window:AddTab({Title = "Tab Evade", Icon = ""}),
+    Bounty = Window:AddTab({ Title = "Tab Auto Bounty", Icon = "" }),
     Door = Window:AddTab({ Title = "Tab Door", Icon = "" }),
     BB = Window:AddTab({ Title = "Tab Bladeball", Icon = "" }),
     Fs = Window:AddTab({ Title = "Tab Fisch", Icon = "" }),
@@ -174,7 +173,7 @@ local Tabs = {
     })
 
     Tabs.Main:AddButton({
-        Title = "Grow A Garden",
+        Title = "Grow A Garden {beta}",
         Description = "",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/NguyenAnhKhoa500/NazuHubScript/refs/heads/main/GrowAGarden.lua"))()
@@ -186,14 +185,6 @@ local Tabs = {
         Description = "",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/NguyenAnhKhoa500/BananaHub/refs/heads/main/BananaHub.lua"))()
-        end
-    })
-
-    Tabs.Paid:AddButton({
-        Title = "Maru Hub",
-        Description = "",  
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/KimP/refs/heads/main/MaruHub"))()
         end
     })
 ----------------------------------------Lonely----------------------------------------
@@ -632,102 +623,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs
             loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletgojo/Haidepzai/refs/heads/main/Teddy-Premium"))()
         end
     })
-    
-Tabs.BF:AddButton({
-        Title = "Auto Bounty Lion Hub",
-        Description = "",
-        Callback = function()
-            repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().Team = "Pirates"
-getgenv().Config = {
-    ["Safe Health"] = {50},
-    ["Custom Y Run"] = {
-        Enabled = true,
-        ["Y Run"] = 5000
-    },
-    ["Hunt Method"] = {
-        ["Use Move Predict"] = false,
-        ["Hit and Run"] = false,
-        ["Aimbot"] = true,
-        ["ESP Player"] = true,
-        ["Max Attack Time"] = 60
-    },
-    ["Shop"] = {
-        ["Random Fruit"] = false,
-        ["Store Fruit"] = true,
-        ["Zoro Sword"] = false
-    }, 
-    ["Ui Theme"] = {
-        ["Background"] = "139756291389843",
-        ["Skip Button"] = "113079599736013",
-        ["Reset Bounty Button"] = "118191900561814"
-    },
-    ["Setting"] = {
-        ["World"] = nil,
-        ["White Screen"] = false,
-        ["Invisible"] = true,
-        ["Fast Delay"] = 0.7, 
-        ["Tween Speed"] = 350,
-        ["Set Player Server Hop"] = 1,
-        ["Url"] = "Your_Webhook_Url",
-        ["Chat"] = {
-            Enabled = true,
-            Wait = 350,
-            Massage = {"Fan YT Nghiarobloxtt"}
-        }
-    },
-    ["Skip"] = {
-        ["Avoid V4"] = false
-    },
-    ["Spam All Skill On V4"] = {
-        Enabled = true,
-        ["Weapons"] = {"Melee", "Sword", "Gun", "Blox Fruit"}
-    },
-    Items = {
-        Use = {"Melee", "Sword", "Blox Fruit"},
-        Melee = {
-            Enable = true,
-            Delay = 0.4,
-            Skills = {
-                Z = {Enable = true, HoldTime = 0.3},
-                X = {Enable = true, HoldTime = 0.2},
-                C = {Enable = true, HoldTime = 0.5}
-            }
-        },
-        Sword = {
-            Enable = true,
-            Delay = 0.5,
-            Skills = {
-                Z = {Enable = true, HoldTime = 1},
-                X = {Enable = true, HoldTime = 0}
-            }
-        },
-        Gun = {
-            Enable = false,
-            Delay = 0.2,
-            Skills = {
-                Z = {Enable = false, HoldTime = 0.1},
-                X = {Enable = false, HoldTime = 0.1}
-            }
-        },
-        ["Blox Fruit"] = {
-            Enable = true,
-            Delay = 0.4,
-            Skills = {
-                Z = {Enable = true, HoldTime = 0.1},
-                X = {Enable = true, HoldTime = 0.1},
-                C = {Enable = true, HoldTime = 0.15},
-                V = {Enable = true, HoldTime = 0.2},
-                F = {Enable = false, HoldTime = 0.1}
-            }
-        }
-    }
-}
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/10f7f97cebba24a87808c36ebd345a97.lua"))()
-        end
-    })
-    
-Tabs.BF:AddButton({
+
+    Tabs.BF:AddButton({
         Title = "Cokka Hub",
         Description = "",
         Callback = function()
@@ -907,7 +804,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ChopLoris/ArcHub/main
         Tabs.Kai:AddButton(
         {
             Title = "Shinichi Hub",
-            Description = "Shinigay Hub",
+            Description = "",
             Callback = function()
                 getgenv().Shinichi = {
     ["Buy Seeds"] = {
@@ -1308,6 +1205,204 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScrip
     ["Send Test Webhook"] = false,
 }
 loadstring(game:HttpGet("https://api.realaya.xyz/v1/files/l/73mkp0aqyfo4ypy8hvl0nz10lq49fey5.lua"))()
+        end
+    })
+----------------------------------------Bounty------------------------------------------
+    Tabs.Bounty:AddButton({
+        Title = "Auto Bounty Sera Hub",
+        Description = "Have Key",
+        Callback = function()
+            getgenv().config = {
+    ["Use Race"] = {
+        ["V4"] = true,
+        ["V3"] = true
+    },
+    ["BypassTp"] = false,
+    ["Info Screen"] = true,
+    ["SafeHealth"] = 4000,
+    ["Webhooks"] = {
+        ["Toggle Webhook"] = true,
+        ["Link Webhook"] = ""
+    },
+    ["White Screen"] = false,
+    ["SkipFruit"] = {
+        "Portal-Portal"
+    },
+    ["Skip Race V4 User"] = true,
+    ["Team"] = "Pirates",
+    ["MaxBountyHunt"] = 30000000,
+    ["MinBountyHunt"] = 0,
+    ["MainSkillToggle"] = {
+        ["Sword"] = {
+            ["Enable"] = true,
+            ["Skills"] = {
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0.2
+                },
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0.2
+                }
+            },
+            ["Delay"] = 1
+        },
+        ["Blox Fruit"] = {
+            ["Enable"] = true,
+            ["Skills"] = {
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 2
+                },
+                ["C"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0
+                },
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0
+                },
+                ["F"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0
+                },
+                ["V"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0
+                }
+            },
+            ["Delay"] = 2
+        },
+        ["Melee"] = {
+            ["Enable"] = true,
+            ["Skills"] = {
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0
+                },
+                ["C"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0
+                },
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 2.5
+                }
+            },
+            ["Delay"] = 1.75
+        },
+        ["Gun"] = {
+            ["Enable"] = true,
+            ["Skills"] = {
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0
+                },
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0
+                }
+            },
+            ["Delay"] = 1
+        }
+    }
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LumosSera/Serra/refs/heads/main/Bounty.lua"))()
+        end
+    })
+
+    Tabs.Bounty:AddButton({
+        Title = "Auto Bounty Lion Hub",
+        Description = "",
+        Callback = function()
+            repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().Team = "Pirates"
+getgenv().Config = {
+    ["Safe Health"] = {50},
+    ["Custom Y Run"] = {
+        Enabled = true,
+        ["Y Run"] = 5000
+    },
+    ["Hunt Method"] = {
+        ["Use Move Predict"] = false,
+        ["Hit and Run"] = false,
+        ["Aimbot"] = true,
+        ["ESP Player"] = true,
+        ["Max Attack Time"] = 60
+    },
+    ["Shop"] = {
+        ["Random Fruit"] = false,
+        ["Store Fruit"] = true,
+        ["Zoro Sword"] = false
+    }, 
+    ["Ui Theme"] = {
+        ["Background"] = "139756291389843",
+        ["Skip Button"] = "113079599736013",
+        ["Reset Bounty Button"] = "118191900561814"
+    },
+    ["Setting"] = {
+        ["World"] = nil,
+        ["White Screen"] = false,
+        ["Invisible"] = true,
+        ["Fast Delay"] = 0.7, 
+        ["Tween Speed"] = 350,
+        ["Set Player Server Hop"] = 1,
+        ["Url"] = "Your_Webhook_Url",
+        ["Chat"] = {
+            Enabled = true,
+            Wait = 350,
+            Massage = {"Fan YT Nghiarobloxtt"}
+        }
+    },
+    ["Skip"] = {
+        ["Avoid V4"] = false
+    },
+    ["Spam All Skill On V4"] = {
+        Enabled = true,
+        ["Weapons"] = {"Melee", "Sword", "Gun", "Blox Fruit"}
+    },
+    Items = {
+        Use = {"Melee", "Sword", "Blox Fruit"},
+        Melee = {
+            Enable = true,
+            Delay = 0.4,
+            Skills = {
+                Z = {Enable = true, HoldTime = 0.3},
+                X = {Enable = true, HoldTime = 0.2},
+                C = {Enable = true, HoldTime = 0.5}
+            }
+        },
+        Sword = {
+            Enable = true,
+            Delay = 0.5,
+            Skills = {
+                Z = {Enable = true, HoldTime = 1},
+                X = {Enable = true, HoldTime = 0}
+            }
+        },
+        Gun = {
+            Enable = false,
+            Delay = 0.2,
+            Skills = {
+                Z = {Enable = false, HoldTime = 0.1},
+                X = {Enable = false, HoldTime = 0.1}
+            }
+        },
+        ["Blox Fruit"] = {
+            Enable = true,
+            Delay = 0.4,
+            Skills = {
+                Z = {Enable = true, HoldTime = 0.1},
+                X = {Enable = true, HoldTime = 0.1},
+                C = {Enable = true, HoldTime = 0.15},
+                V = {Enable = true, HoldTime = 0.2},
+                F = {Enable = false, HoldTime = 0.1}
+            }
+        }
+    }
+}
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/10f7f97cebba24a87808c36ebd345a97.lua"))()
         end
     })
 ----------------------------------------Doors----------------------------------------
