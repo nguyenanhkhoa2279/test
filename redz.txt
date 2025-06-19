@@ -1,9 +1,9 @@
 
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
 local Window = redzlib:MakeWindow({
-   Title = "NazuX Main Redz",
-   SubTitle = "by Anhkhoa2279",
-   SaveFolder = ""
+   Title = "Redz Hub : Blox Fruits",
+   SubTitle = "by redz9999",
+   SaveFolder = "redz Hub | Blox Fruits.lua"
 })
 
 local AFKOptions = {}
