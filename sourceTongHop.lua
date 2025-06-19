@@ -41,15 +41,6 @@ repeat
     wait()
 until game:IsLoaded() and game.Players.LocalPlayer
 
-print("Whitelist success!")
-wait(.5)
-game.StarterGui:SetCore("SendNotification", {
-     Title = "Tên Hub";
-     Text = "Loading";
-     Icon = "";
-     Duration = "2";
-})
-
 wait(.1)
 
 
@@ -138,8 +129,8 @@ end)
 print("Loading Main Ui")
 wait(.1)
 game.StarterGui:SetCore("SendNotification", {
-     Title = "Lonely Hub";
-     Text = "Loading Main Ui";
+     Title = "NazuX Hub";
+     Text = "Welcome to NazuX hub";
      Icon = "";
      Duration = "2";
 })
@@ -161,22 +152,95 @@ local Window = Fluent:CreateWindow({
 })
 ----------------------------------------Tab----------------------------------------
 local Tabs = {
-    If = Window:AddTab({ Title = "Info", Icon = "" }),
-    Client = Window:AddTab({ Title = "Client", Icon = "" }),
-    Dev = Window:AddTab({ Title = "Developer", Icon = "" }),
-    LP = Window:AddTab({ Title = "Local Player", Icon = "" }),
-    BF = Window:AddTab({ Title = "Blox Fruits", Icon = "" }),
-    Door = Window:AddTab({ Title = "Door", Icon = "" }),
-    BB = Window:AddTab({ Title = "Bladeball", Icon = "" }),
-    Fs = Window:AddTab({ Title = "Fisch", Icon = "" }),
-    Blr = Window:AddTab({ Title = "Bluelock:Rivals", Icon = "" }),
-    Shrimp = Window:AddTab({ Title = "Shrimp Game", Icon = "" }),
-    AD = Window:AddTab({ Title = "Anime Defender", Icon = "" }),
-    All = Window:AddTab({ Title = "Universal Script", Icon = "" }),
-    Paid = Window:AddTab({ Title = "Script Paid", Icon = "" }),
-    ST = Window:AddTab({ Title = "Settings", Icon = "" }),
-    If = Window:AddTab({ Title = "Info", Icon = "" }),
+    Dis = Window:AddTab({ Title = "Tab Discord", Icon = "" }),
+    Main = Window:AddTab({ Title = "Tab NazuX hub main", Icon = "" }),
+    Lonely = Window:AddTab({ Title = "Tab Lonely hub", Icon = "" }),
+    Client = Window:AddTab({ Title = "Tab Client", Icon = "" }),
+    Dev = Window:AddTab({ Title = "Tab Developer", Icon = "" }),
+    LP = Window:AddTab({ Title = "Tab Local Player", Icon = "" }),
+    BF = Window:AddTab({ Title = "Tab Blox Fruits", Icon = "" }),
+    Door = Window:AddTab({ Title = "Tab Door", Icon = "" }),
+    BB = Window:AddTab({ Title = "Tab Bladeball", Icon = "" }),
+    Fs = Window:AddTab({ Title = "Tab Fisch", Icon = "" }),
+    Blr = Window:AddTab({ Title = "Tab Bluelock:Rivals", Icon = "" }),
+    Shrimp = Window:AddTab({ Title = "Tab Shrimp Game", Icon = "" }),
+    AD = Window:AddTab({ Title = "Tab Anime Defender", Icon = "" }),
+    All = Window:AddTab({ Title = "Tab Universal Script", Icon = "" }),
+    Dead = Window:AddTab({ Title = "Tab Dead Rail", Icon = "" }),
+    Grow = Window:AddTab({ Title = "Tab Grow A Garden", Icon = "" }),
 }
+----------------------------------------Info----------------------------------------
+    Tabs.Dis:AddButton({
+        Title = "Discord",
+        Description = "Click to copy link",
+        Callback = function()
+            setclipboard("https://discord.gg/HBEmPYXd")
+        end
+    })
+----------------------------------------Main----------------------------------------
+    Tabs.Main:AddButton({
+        Title = "Blox Fruits",
+        Description = "NazuX main banana hub",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/nguyenanhkhoa2279/Anhkhoa2279/refs/heads/main/NazuXScriptMain.lua"))()
+        end
+    })
+
+    Tabs.Main:AddButton({
+        Title = "Grow A Garden {beta}",
+        Description = "Grow a garden but beta",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/nguyenanhkhoa2279/Anhkhoa2279/refs/heads/main/NazuXScriptGrow.lua"))()
+        end
+    })
+
+    Tabs.Main:AddButton({
+        Title = "Auto Bond",
+        Description = "Script auto bond woking dead rail",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/nguyenanhkhoa2279/Anhkhoa2279/refs/heads/main/NazuXScriptBond.lua"))()
+        end
+    })
+----------------------------------------Lonely----------------------------------------
+    Tabs.Lonely:AddButton({
+        Title = "Lonely Blox Fruits",
+        Description = "Lonely Blox Fruits",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip12/LonelyHub/refs/heads/main/LonelyHubScripts/LonelyHub-BF.lua"))()
+        end
+    })
+
+    Tabs.Lonely:AddButton({
+        Title = "Lonely Dead Rail",
+        Description = "Lonely Dead Rail",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip12/LonelyHub/refs/heads/main/LonelyHubScripts/LonelyHub-Deadrail.lua"))()
+        end
+    })
+
+    Tabs.Lonely:AddButton({
+        Title = "Lonely Meme sea",
+        Description = "Lonely Meme sea",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip12/LonelyHub/refs/heads/main/LonelyHubScripts/LonelyHub-MemeSea.lua"))()
+        end
+    })
+
+    Tabs.Lonely:AddButton({
+        Title = "Lonely Fisch",
+        Description = "Lonely Fisch",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip12/LonelyHub/refs/heads/main/LonelyHubScripts/LonelyHub-Fisch.lua"))()
+        end
+    })
+
+    Tabs.Lonely:AddButton({
+        Title = "Lonely Script Hub",
+        Description = "Lonely Script Hub",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip12/LonelyHub/refs/heads/main/LonelyHubScripts/LonelyHub-ScriptHub.lua"))()
+        end
+    })
 ----------------------------------------Client----------------------------------------
     Tabs.Client:AddButton({
         Title = "SynapseX",
@@ -513,154 +577,73 @@ Tabs.LP:AddButton(
         }
     )
 ----------------------------------------BF----------------------------------------
-    Tabs.BF:AddButton({
-        Title = "Redz Hub",
-        Description = "NoKey",  
+    Tabs.Paid:AddButton({
+        Title = "Banana Hub",
+        Description = "Premium free",
         Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/NguyenAnhKhoa500/BananaHub/refs/heads/main/BananaHub.lua"))()
+        end
+    })
+
+Tabs.BF:AddButton({
+        Title = "Redz Hub",
+        Description = "The best script no key",  
+        Callback = function()
+local Settings = {
+    JoinTeam = "Pirates"; -- Pirates / Marines
+    Translator = true;   -- true / false
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)
         end
     })
     
-    -- redz old
+Tabs.BF:AddButton({
+        Title = "Hiru Hub",
+        Description = "Script no key",  
+        Callback = function()
+            repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaStupid/ExecuteGames/main/QuestGames.lua"))()
+        end
+    })
     
     Tabs.BF:AddButton({
         Title = "Vxeze Hub",
-        Description = "NoKey",  
+        Description = "Script it's from vietnamese (I think so)",  
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/Skidlamcho.txt"))()
         end
     })
     
     Tabs.BF:AddButton({
-        Title = "Angry Hub",
-        Description = "NoKey",  
-        Callback = function()
-            loadstring(game:HttpGet("https://gist.githubusercontent.com/angry5/ec20347a74aa4e46c71b15b6093eeaf5/raw/Angery.lua"))()
-        end
-    })
-    
-    Tabs.BF:AddButton({
         Title = "Tsuo Hub",
-        Description = "NoKey",  
+        Description = "Script best v4 and Draco",  
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/Tsuoscripts"))()
         end
     })
-Tabs.BF:AddButton({
+    Tabs.BF:AddButton({
+        Title = "Xero Hub",
+        Description = "Script no key",  
+        Callback = function()
+            getgenv().Team = "Marines"
+getgenv().Hide_Menu = false
+getgenv().Auto_Execute = false
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/main.lua"))()
+        end
+    })
+
+    Tabs.BF:AddButton({
         Title = "Teddy HOP",
-        Description = "HOP SV and NoKey",
+        Description = "Script auto hop sever",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletgojo/Haidepzai/refs/heads/main/Teddy-Premium"))()
         end
     })
-    
-Tabs.BF:AddButton({
-        Title = "Auto Bounty Sera Hub",
-        Description = "Have Key",
-        Callback = function()
-            getgenv().config = {
-    ["Use Race"] = {
-        ["V4"] = true,
-        ["V3"] = true
-    },
-    ["BypassTp"] = false,
-    ["Info Screen"] = true,
-    ["SafeHealth"] = 4000,
-    ["Webhooks"] = {
-        ["Toggle Webhook"] = true,
-        ["Link Webhook"] = ""
-    },
-    ["White Screen"] = false,
-    ["SkipFruit"] = {
-        "Portal-Portal"
-    },
-    ["Skip Race V4 User"] = true,
-    ["Team"] = "Pirates",
-    ["MaxBountyHunt"] = 30000000,
-    ["MinBountyHunt"] = 0,
-    ["MainSkillToggle"] = {
-        ["Sword"] = {
-            ["Enable"] = true,
-            ["Skills"] = {
-                ["X"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0.2
-                },
-                ["Z"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0.2
-                }
-            },
-            ["Delay"] = 1
-        },
-        ["Blox Fruit"] = {
-            ["Enable"] = true,
-            ["Skills"] = {
-                ["X"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 2
-                },
-                ["C"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0
-                },
-                ["Z"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0
-                },
-                ["F"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0
-                },
-                ["V"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0
-                }
-            },
-            ["Delay"] = 2
-        },
-        ["Melee"] = {
-            ["Enable"] = true,
-            ["Skills"] = {
-                ["X"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0
-                },
-                ["C"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0
-                },
-                ["Z"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 2.5
-                }
-            },
-            ["Delay"] = 1.75
-        },
-        ["Gun"] = {
-            ["Enable"] = true,
-            ["Skills"] = {
-                ["X"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0
-                },
-                ["Z"] = {
-                    ["Enable"] = true,
-                    ["HoldTime"] = 0
-                }
-            },
-            ["Delay"] = 1
-        }
-    }
-}
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/LumosSera/Serra/refs/heads/main/Bounty.lua"))()
-        end
-    })
-    
-Tabs.BF:AddButton({
+    Tabs.BF:AddButton({
         Title = "Cokka Hub",
-        Description = "Have Key",
+        Description = "Script got key",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
         end
@@ -668,7 +651,7 @@ Tabs.BF:AddButton({
     
     Tabs.BF:AddButton({
         Title = "Hoho Hub V4",
-        Description = "Have Key",
+        Description = "Script acsu123 got key",
         Callback = function()
             _G.HohoVersion = "v4"
             loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()
@@ -677,7 +660,7 @@ Tabs.BF:AddButton({
 
 Tabs.BF:AddButton({
         Title = "Frost Ware Chest",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://frostware.onrender.com/fwchest"))()
         end
@@ -685,7 +668,7 @@ Tabs.BF:AddButton({
     
     Tabs.BF:AddButton({
         Title = "Frost Ware Main",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://frostware.onrender.com/fw"))()
         end
@@ -694,7 +677,7 @@ Tabs.BF:AddButton({
     
     Tabs.BF:AddButton({
         Title = "ThunderZ Chest",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
         _G.Team = "Marine" -- "Marine" or "Pirate"
 _G.MetodeTeleport = "Tween" --"Instant" or "Tween"
@@ -703,56 +686,43 @@ _G.MetodeTeleport = "Tween" --"Instant" or "Tween"
     })
     
     Tabs.BF:AddButton({
-        Title = "Flow Hub",
-        Description = "No Key",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Overflow/refs/heads/main/Main.lua"))()
-        end
-    })
-    Tabs.BF:AddButton({
-        Title = "Forge Hub",
-        Description = "No Key",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Skzuppy/forge-hub/main/loader.lua"))()
-        end
-    })
-    
-    Tabs.BF:AddButton({
         Title = "Lion Hub",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
            getgenv().Team = "Pirates"
             loadstring(game:HttpGet("https://raw.githubusercontent.com/NHMdz/BloxFruit/refs/heads/main/Lion%20Hub.lua"))()
         end
     })
-    
+
     Tabs.BF:AddButton({
         Title = "Volcano Hub",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/wpisstestfprg/Volcano/refs/heads/main/VolcanoNewUpdated.luau"))()
         end
     })
     
     Tabs.BF:AddButton({
-        Title = "Hiru Hub(Hicu)",
-        Description = "No Key",
+        Title = "W azure",
+        Description = "IDK",
         Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/NGUYENVUDUY1/Dev-Hiru/refs/heads/main/HiruHub.lua"))()
+getgenv().Team = "Marines"
+getgenv().AutoLoad = false --Will Load Script On Server Hop
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
         end
     })
     
     Tabs.BF:AddButton({
         Title = "Astral Hub",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Overgustx2/Main/refs/heads/main/BloxFruits_25.html"))()
         end
     })
-    
+
     Tabs.BF:AddButton({
         Title = "Quantum Onyx Hub",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Trustmenotcondom/QTONYX/refs/heads/main/QuantumOnyx.lua"))()
         end
@@ -760,7 +730,7 @@ _G.MetodeTeleport = "Tween" --"Instant" or "Tween"
     
     Tabs.BF:AddButton({
         Title = "Relz Hub",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/farghii/relzhub/main/execute.hack"))()
         end
@@ -768,7 +738,7 @@ _G.MetodeTeleport = "Tween" --"Instant" or "Tween"
     
     Tabs.BF:AddButton({
         Title = "Alchemy Hub",
-        Description = "Have Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()
         end
@@ -776,7 +746,7 @@ _G.MetodeTeleport = "Tween" --"Instant" or "Tween"
     
     Tabs.BF:AddButton({
         Title = "Blue X Hub",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()
         end
@@ -784,23 +754,15 @@ _G.MetodeTeleport = "Tween" --"Instant" or "Tween"
     
     Tabs.BF:AddButton({
         Title = "Kncrypt Hub",
-        Description = "Have Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/Kncrypt/refs/heads/main/sources/BloxFruit.lua"))()
-        end
-    })
-    
-    Tabs.BF:AddButton({
-        Title = "Xero Hub",
-        Description = "No Key",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/main.lua"))()
         end
     })
    
    Tabs.BF:AddButton({
         Title = "Rubu Hub",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/RubuRoblox/refs/heads/main/RubuBF"))()
         end
@@ -808,17 +770,9 @@ _G.MetodeTeleport = "Tween" --"Instant" or "Tween"
     
    Tabs.BF:AddButton({
         Title = "Speed X Hub",
-        Description = "No Key",
+        Description = "IDK",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))()
-        end
-    })
-    
-    Tabs.BF:AddButton({
-        Title = "Billdev Hub",
-        Description = "Have Key,New Hub",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/selciawashere/screepts/refs/heads/main/BFKEYSYS"))()
         end
     })
 ----------------------------------------Doors----------------------------------------
@@ -1261,73 +1215,35 @@ Tabs.All:AddButton({
             print(identifyexecutor())
         end
     })
-----------------------------------------ScriptHub----------------------------------------
-    Tabs.ScrH:AddButton({
-        Title = "Script Blox",
-        Description = "https://scriptblox.com",
+----------------------------------------Dead----------------------------------------
+    Tabs.Dead:AddButton({
+        Title = "Skull hub",
+        Description = "Script no Key",
         Callback = function()
-            setclipboard("https://scriptblox.com")
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/hungquan99/SkullHub/main/loader.lua'))()
         end
     })
     
-    Tabs.ScrH:AddButton({
-        Title = "Script Pastebin",
-        Description = "https://scriptpastebin.com",
+   Tabs.Dead:AddButton({
+        Title = "Speed X Hub",
+        Description = "IDK",
         Callback = function()
-            setclipboard("https://scriptpastebin.com")
-        end
-    })
-
-    Tabs.ScrH:AddButton({
-        Title = "We Are Dev",
-        Description = "https://wearedev.net",
-        Callback = function()
-            setclipboard("https://wearedev.net")
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))()
         end
     })
 ----------------------------------------ScrP----------------------------------------
-    Tabs.SP:AddButton({
-        Title = "Shyun.shop",
-        Description = "For Vietnamese People Only.Nhanh-Gọn-Cụt Tay",
+   Tabs.Grow:AddButton({
+        Title = "Speed X Hub",
+        Description = "IDK",
         Callback = function()
-            setclipboard("https://shyun.shop")
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))()
         end
-    })
-    
-    Tabs.SP:AddButton({
-        Title = "Yukstore.com",
-        Description = "For Vietnamese People Only",
-        Callback = function()
-            setclipboard("https://yukstore.com")
-        end
-    })
-----------------------------------------Info----------------------------------------
-print("Loading Server Tab")
-wait(.5)
-print("Loading Info Tab")
-wait(.1)
-Tabs.If:AddParagraph({
-        Title = "Player",
-        Content = "Thank "..game.Players.LocalPlayer.Name.." for use script!"
     })
 
-    Tabs.If:AddParagraph({
-        Title = "NazuX Hub",
-        Content = "Script creator by AnhKhoa2279"
-    })
-  
-      Tabs.If:AddButton({
-        Title = "Youtube",
-        Description = "",
+   Tabs.Grow:AddButton({
+        Title = "Nat Hub",
+        Description = "IDK",
         Callback = function()
-            setclipboard("nick yt của m")
-        end
-    })
-        
-    Tabs.If:AddButton({
-        Title = "Discord",
-        Description = "",
-        Callback = function()
-            setclipboard("discord của m")
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ArdyBotzz/NatHub/refs/heads/master/NatHub.lua"))()
         end
     })
