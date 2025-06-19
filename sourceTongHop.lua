@@ -13,12 +13,13 @@ if executor then
         "Fluxus",
         "CodeX",
         "Krnl",
+        "Trigon",
+        "Evon",
+        "Cryptic",
         "Potassium",
         "Argon",
         "Nezur",
         "Cubix",
-        "Solara",
-        "Volcano",
     }
 
     local isExecutorSupported = true
@@ -32,7 +33,7 @@ if executor then
     if isExecutorSupported then
         print("Supported Executor!")
     else
-        game.Players.LocalPlayer:Kick("Not supported This executor!") -- kick nếu exec ko support
+        game.Players.LocalPlayer:Kick("Not supported TNG Skid executor!") -- kick nếu exec ko support
     end
 end
 
@@ -43,7 +44,7 @@ until game:IsLoaded() and game.Players.LocalPlayer
 print("Whitelist success!")
 wait(.5)
 game.StarterGui:SetCore("SendNotification", {
-     Title = "Nazu Hub";
+     Title = "Tên Hub";
      Text = "Loading";
      Icon = "";
      Duration = "2";
@@ -83,7 +84,7 @@ ImageLabel.BackgroundTransparency = 1
 ImageLabel.BorderSizePixel = 1
 ImageLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
 ImageLabel.ImageColor3 = Color3.fromRGB(255, 255, 255)
-ImageLabel.Image = "http://www.roblox.com/asset/?id=5009915795"
+ImageLabel.Image = "http://www.roblox.com/asset/?id=5009915795" -- Thay 5009915795 Bằng ảnh của anh em
 
 UICorner.CornerRadius = UDim.new(1, 0)
 UICorner.Parent = Frame
@@ -137,8 +138,8 @@ end)
 print("Loading Main Ui")
 wait(.1)
 game.StarterGui:SetCore("SendNotification", {
-     Title = "Nazu Hub";
-     Text = "Đang tải";
+     Title = "Lonely Hub";
+     Text = "Loading Main Ui";
      Icon = "";
      Duration = "2";
 })
@@ -150,16 +151,17 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Nazu Hub",
-    SubTitle = "By Anh Khoa",
+    Title = "NazuX hub",
+    SubTitle = "by AnhKhoa2279",
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
-    Acrylic = false, 
-    Theme = "Dark",
+    Acrylic = true, 
+    Theme = "Vynizu",
     MinimizeKey = Enum.KeyCode.LeftControl
 })
 ----------------------------------------Tab----------------------------------------
 local Tabs = {
+    If = Window:AddTab({ Title = "Info", Icon = "" }),
     Client = Window:AddTab({ Title = "Client", Icon = "" }),
     Dev = Window:AddTab({ Title = "Developer", Icon = "" }),
     LP = Window:AddTab({ Title = "Local Player", Icon = "" }),
@@ -169,13 +171,13 @@ local Tabs = {
     Fs = Window:AddTab({ Title = "Fisch", Icon = "" }),
     Blr = Window:AddTab({ Title = "Bluelock:Rivals", Icon = "" }),
     Shrimp = Window:AddTab({ Title = "Shrimp Game", Icon = "" }),
-    AD = Window:AddTab({ Title = "Dead Rail", Icon = "" }),
-    All = Window:AddTab({ Title = "Grow A Garden", Icon = "" }),
-    Ly = Window:AddTab({ Title = "Lonely Hub", Icon = "" }),
+    AD = Window:AddTab({ Title = "Anime Defender", Icon = "" }),
+    All = Window:AddTab({ Title = "Universal Script", Icon = "" }),
+    Paid = Window:AddTab({ Title = "Script Paid", Icon = "" }),
+    ST = Window:AddTab({ Title = "Settings", Icon = "" }),
+    If = Window:AddTab({ Title = "Info", Icon = "" }),
 }
 ----------------------------------------Client----------------------------------------
-print("Client Tab Loading")
-wait(1)
     Tabs.Client:AddButton({
         Title = "SynapseX",
         Description = "Can Run Script But Use Your Executor's Api",
@@ -201,9 +203,7 @@ wait(1)
     })
     
 ----------------------------------------Dev----------------------------------------
-print("Dev Tab Loading")
-wait(1)
-Tabs.Dev:AddButton({
+    Tabs.Dev:AddButton({
         Title = "Infinite Yield",
         Description = "Command",
         Callback = function()
@@ -211,7 +211,7 @@ Tabs.Dev:AddButton({
         end
     })
     
-Tabs.Dev:AddButton({
+    Tabs.Dev:AddButton({
         Title = "Dark Dex",
         Description = "Show Game File",
         Callback = function()
@@ -219,7 +219,7 @@ Tabs.Dev:AddButton({
         end
     })
   
-Tabs.Dev:AddButton({
+    Tabs.Dev:AddButton({
         Title = "Simple Spy",
         Description = "Help u create own script or other",
         Callback = function()
@@ -513,17 +513,7 @@ Tabs.LP:AddButton(
         }
     )
 ----------------------------------------BF----------------------------------------
-print("Loading Script Tab")
-wait(1)
-print("Loading BF Script")
-wait(.1)
--- Toàn script cũ tự thêm script của b vào
-Tabs.BF:AddParagraph({
-        Title = "Blox Fruits",
-        Content = "Script Support BloxFruits Scroll Down For More"
-    })
-wait(5)
-Tabs.BF:AddButton({
+    Tabs.BF:AddButton({
         Title = "Redz Hub",
         Description = "NoKey",  
         Callback = function()
@@ -832,13 +822,6 @@ _G.MetodeTeleport = "Tween" --"Instant" or "Tween"
         end
     })
 ----------------------------------------Doors----------------------------------------
-print("loading Doors Script")
-wait(1)
-Tabs.Door:AddParagraph({
-        Title = "Doors",
-        Content = "Script Support Doors Scroll Down For More"
-    })
-    
     Tabs.Door:AddButton({
         Title = "Mspaint V4",
         Description = "Have Key,Copy Web And Join Discord Link To Getkey",
@@ -897,13 +880,6 @@ Tabs.Door:AddParagraph({
     
     
 ----------------------------------------BB----------------------------------------
- print("Loading BB Script")
- wait(1)
-Tabs.BB:AddParagraph({
-        Title = "Blade Ball",
-        Content = "Script Support Blade Ball Scroll Down For More"
-    })
-    
     Tabs.BB:AddButton({
         Title = "Eminence Hub",
         Description = "No Key",
@@ -1016,14 +992,7 @@ Tabs.BB:AddParagraph({
         end
     })
 ----------------------------------------Fisch----------------------------------------
-print("Loading Fisch Script")
-wait(1)
-Tabs.Fs:AddParagraph({
-        Title = "Fisch",
-        Content = "Script Support Fisch Scroll Down For More"
-    })
-    
-Tabs.Fs:AddButton({
+    Tabs.Fs:AddButton({
         Title = "Speed X Hub",
         Description = "No Key",
         Callback = function()
@@ -1104,15 +1073,8 @@ Tabs.Fs:AddButton({
     })
     
     
-----------------------------------------BLR----------------------------------------
-print("Loading BLR Tab")
-wait(1)
-Tabs.Blr:AddParagraph({
-        Title = "Blue Lock : Rivals",
-        Content = "Script Support BLR Scroll Down For More"
-    })
-    
-Tabs.Blr:AddButton({
+----------------------------------------BLR---------------------------------------- 
+    Tabs.Blr:AddButton({
         Title = "Sterling Hub",
         Description = "Key:IDK",
         Callback = function()
@@ -1149,7 +1111,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Zayn31214/name/refs/h
             loadstring(game:HttpGet("https://rawscripts.net/raw/UPD-Blue-Lock:-Rivals-OMG-Hub-29091"))()
         end
     })
- Tabs.Blr:AddButton({
+    Tabs.Blr:AddButton({
         Title = "Tbao Hub",
         Description = "No Key",
         Callback = function()
@@ -1197,13 +1159,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Zayn31214/name/refs/h
         end
     })
 ----------------------------------------ShrimpGame----------------------------------------
-print("Loading Shrimp Game Script")
-wait(.5)
-Tabs.Shrimp:AddParagraph({
-        Title = "Shrimp Game",
-        Content = "Script Support Shrimp Game Scroll Down For More"
-    })
-Tabs.Shrimp:AddButton({
+    Tabs.Shrimp:AddButton({
         Title = "Rip Hub",
         Description = "No Key",
         Callback = function()
@@ -1219,84 +1175,159 @@ Tabs.Shrimp:AddButton({
         end
     })
 ----------------------------------------AD----------------------------------------
-print("Load Dead rail Script")
+print("Load Anime DF Script")
 wait(.5)
 Tabs.AD:AddParagraph({
-        Title = "Dead rail",
+        Title = "Anime DF",
         Content = "Script Support Anime DF Scroll Down For More"
     })
     
     Tabs.AD:AddButton({
-        Title = "Skull hub (LootLab)",
-        Description = "Get Key",
-        Callback = function()
-           setclipboard("https://ads.luarmor.net/get_key?for=Skull_Hub_Key_Lootlabs-XdUwPMIMRfmC")
-        end
-    })
-
-    Tabs.AD:AddButton({
-        Title = "Skull hub (LootLabs)",
-        Description = "Get Key",
-        Callback = function()
-           setclipboard("https://ads.luarmor.net/get_key?for=Skull_Hub_Key_Lootlabs-XdUwPMIMRfmC")
-        end
-    })
-
-    Tabs.AD:AddButton({
-        Title = "Skull hub (Linkvertise)",
-        Description = "Get Key",
-        Callback = function()
-           setclipboard("https://ads.luarmor.net/get_key?for=Skull_Hub_Key_Linkvertise-IsXXlldTbnwH")
-        end
-    })
-
-    Tabs.AD:AddButton({
-        Title = "Nat hub",
+        Title = "Buang Hub",
         Description = "No Key",
         Callback = function()
-           loadstring(game:HttpGet("https://raw.githubusercontent.com/ArdyBotzz/NatHub/refs/heads/master/NatHub.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/buang5516/buanghub/main/BUANGHUB.lua"))()
         end
     })
-----------------------------------------AllGame----------------------------------------
-print("Loading Grow a Garden Script")
-wait(1)
-Tabs.All:AddParagraph({
-        Title = "Grow a Garden",
-        Content = "Script Support All Games Scroll Down For More"
+    
+    Tabs.AD:AddButton({
+        Title = "Nousigi Hub",
+        Description = "Have Key",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/Nausigi"))()
+        end
     })
-Tabs.All:AddButton({
-        Title = "BlueX hub",
+----------------------------------------AllGame----------------------------------------     
+    Tabs.All:AddButton({
+        Title = "Unnamed ESP",
         Description = "No Key",
         Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua"))()
         end
     })
-----------------------------------------Ly----------------------------------------
-print("Loading Lonely Script")
-wait(1)
-Tabs.All:AddParagraph({
-        Title = "Loney Hub script",
-        Content = "Script Support All Games Scroll Down For More"
+    
+    Tabs.All:AddButton({
+        Title = "Aimbot",
+        Description = "Make By spdmteam.com/ArceusX Aim",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/refs/heads/main/Arceus%20Aimbot.lua"))()
+        end
+    })
+    
+    Tabs.All:AddButton({
+        Title = "Mobile Keyboard",
+        Description = "Make By Delta Team",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Delta-Scripts/refs/heads/main/MobileKeyboard.txt"))()
+        end
     })
     Tabs.All:AddButton({
-        Title = "Lonely Tổng hợp",
-        Description = "có thể bị văng hoặc không hỗ trợ",
+        Title = "Infinite Yield",
+        Description = "Command",
         Callback = function()
-            repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
-getgenv().Key = "rDgZFssRIuFdInErEStWEVNZkylpRprt" 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip2012/Lonely_Hub/refs/heads/main/source"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
         end
     })
-----------------------------------------LoadedNotify----------------------------------------
-    game.StarterGui:SetCore("SendNotification", {
-     Title = "Nazu hub";
-     Text = "Loaded!";
-     Icon = "";
-     Duration = "2";
-})
-wait(.1)
+    
+Tabs.All:AddButton({
+        Title = "Dark Dex",
+        Description = "Show Game File",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+        end
+    })
+ 
+Tabs.All:AddButton({
+        Title = "Simple Spy",
+        Description = "Help u create own script or other",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
+        end
+    })
+      
+    Tabs.All:AddButton({
+        Title = "Executor Check",
+        Description = "Press F9 or chat /console to open console!",
+        Callback = function()
+            print("----------------------------------------UNC----------------------------------------")
+            wait(.1)
+            loadstring(game:HttpGet("https://github.com/ltseverydayyou/uuuuuuu/blob/main/UNC%20test?raw=true"))()
+            wait(.1)
+            print("----------------------------------------Level Exectr----------------------------------------")
+            wait(.1)
+            printidentity()
+            print("----------------------------------------Executor Name Checker----------------------------------------")
+            wait(.1)
+            print(identifyexecutor())
+        end
+    })
+----------------------------------------ScriptHub----------------------------------------
+    Tabs.ScrH:AddButton({
+        Title = "Script Blox",
+        Description = "https://scriptblox.com",
+        Callback = function()
+            setclipboard("https://scriptblox.com")
+        end
+    })
+    
+    Tabs.ScrH:AddButton({
+        Title = "Script Pastebin",
+        Description = "https://scriptpastebin.com",
+        Callback = function()
+            setclipboard("https://scriptpastebin.com")
+        end
+    })
 
-wait(.1) 
-print("Done!")
+    Tabs.ScrH:AddButton({
+        Title = "We Are Dev",
+        Description = "https://wearedev.net",
+        Callback = function()
+            setclipboard("https://wearedev.net")
+        end
+    })
+----------------------------------------ScrP----------------------------------------
+    Tabs.SP:AddButton({
+        Title = "Shyun.shop",
+        Description = "For Vietnamese People Only.Nhanh-Gọn-Cụt Tay",
+        Callback = function()
+            setclipboard("https://shyun.shop")
+        end
+    })
+    
+    Tabs.SP:AddButton({
+        Title = "Yukstore.com",
+        Description = "For Vietnamese People Only",
+        Callback = function()
+            setclipboard("https://yukstore.com")
+        end
+    })
+----------------------------------------Info----------------------------------------
+print("Loading Server Tab")
+wait(.5)
+print("Loading Info Tab")
 wait(.1)
-warn("Cali Con Cặc")
+Tabs.If:AddParagraph({
+        Title = "Player",
+        Content = "Thank "..game.Players.LocalPlayer.Name.." for use script!"
+    })
+
+    Tabs.If:AddParagraph({
+        Title = "NazuX Hub",
+        Content = "Script creator by AnhKhoa2279"
+    })
+  
+      Tabs.If:AddButton({
+        Title = "Youtube",
+        Description = "",
+        Callback = function()
+            setclipboard("nick yt của m")
+        end
+    })
+        
+    Tabs.If:AddButton({
+        Title = "Discord",
+        Description = "",
+        Callback = function()
+            setclipboard("discord của m")
+        end
+    })
