@@ -1,24 +1,3 @@
---[[
-
-██╗░░░░░░█████╗░██╗░░░░ ██╗░██████╗░██╗░░██╗██╗██████╗░░░░░██╗░░░░████╗░░░
-██║░░░░░██╔══██╗████╗░░ ██║██╔════╝░██║░░██║██║██╔══██╗░░████║░░██░░░░██╗░
-██║░░░░░██║░░██║██░░██╗ ██║██║░░██╗░███████║██║██████╔╝██░░██║░░░░░░░░██╝░
-██╚═══╗░██║░░██║██░░░ ████║██║░░╚██╗██╔══██║██║██╔═══╝░░░░░██║░░░░░░██╝░░░
-██████║░╚█████╔╝██░░░░░ ██╝╚██████╔╝██║░░██║██║██║░░░░░░░░░██╚═╗░░██╝░░░░░
-░░░░░░░░░╚════╝░░░░░░░░░░░░╚═════╝░ ╚═╝░░╚═╝╚═╝╚═╝░░░░░░░██████╝█████████░
-
-                                  █████████████████████████████████████████
-                                  █  Design by LongHip12                                      █
-                                  █  https://longhip2012.github.io/SouceRoblox  █
-                                  █     Source • Tool                                                       █
-                                  █████████████████████████████████████████
-                                  \______ Cảm ơn đã tin tưởng và sử dụng dịch vụ của chúng tôi ❤️
-
--- Mã nguồn trên shop nhằm mục đích học tập và hoàn toàn miễn phí nên anh em không nên đem đi bán và lạm dụng source đi lùa gà nếu bị phát hiện thì bạn sẽ bị ban ip vĩnh viễn!
--- Source trên shop anh em mua về là up lên github thì nhớ obf lại nhé và có thể tham khảo Moonsec V3 ; luaobfuscator.com ; Base64 v.v hoặc có tiền thì mua lura.ph nhé!
--- Ủng hộ tôi bằng cách truy cập vào PlayerDuo của tôi tại https://linkbio.co/LongHip12 nhé.rất chân thành cảm ơn.
-]]--
-
 ------------------------------------------------------------------------------------------------------------------------------Source------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -125,7 +104,7 @@ Converted["_shadowHolder"].Parent = Converted["_Frame"]
 
 
 
-Converted["_umbraShadow"].Image = "rbxassetid://1316045217"
+Converted["_umbraShadow"].Image = "rbxassetid://91093934153189"
 
 Converted["_umbraShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
 
@@ -323,7 +302,7 @@ Converted["_TextLabel2"].Parent = Converted["_Frame1"]
 
 
 
-Converted["_ImageLabel"].Image = "http://www.roblox.com/asset/?id=116513993412842"
+Converted["_ImageLabel"].Image = "http://www.roblox.com/asset/?id=91093934153189"
 
 Converted["_ImageLabel"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 
