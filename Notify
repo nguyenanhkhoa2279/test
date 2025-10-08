@@ -1,0 +1,182 @@
+-- Script thông báo Roblox kiểu Windows 11
+-- Đặt script này trong một LocalScript trong StarterPlayerScripts
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Tạo ScreenGui để hiển thị thông báo
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "Windows11Notifications"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+-- Hàm tạo thông báo
+function createNotification(title, message, duration, icon)
+	duration = duration or 5 -- Thời gian mặc định 5 giây
+	
+	-- Tạo frame thông báo chính
+	local notificationFrame = Instance.new("Frame")
+	notificationFrame.Name = "Notification"
+	notificationFrame.Size = UDim2.new(0, 350, 0, 100)
+	notificationFrame.Position = UDim2.new(1, 10, 1, -110) -- Bắt đầu từ góc dưới bên phải
+	notificationFrame.AnchorPoint = Vector2.new(1, 1)
+	notificationFrame.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+	notificationFrame.BorderSizePixel = 0
+	notificationFrame.BackgroundTransparency = 0.2
+	notificationFrame.Parent = screenGui
+	
+	-- Hiệu ứng trong suốt
+	local uiCorner = Instance.new("UICorner")
+	uiCorner.CornerRadius = UDim.new(0, 8)
+	uiCorner.Parent = notificationFrame
+	
+	-- Hiệu ứng bóng đổ
+	local uiStroke = Instance.new("UIStroke")
+	uiStroke.Color = Color3.fromRGB(80, 80, 80)
+	uiStroke.Thickness = 1
+	uiStroke.Parent = notificationFrame
+	
+	-- Gradient background (tùy chọn)
+	local gradient = Instance.new("UIGradient")
+	gradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 40, 40)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 25))
+	})
+	gradient.Parent = notificationFrame
+	
+	-- Biểu tượng ứng dụng
+	local iconImage
+	if icon then
+		iconImage = Instance.new("ImageLabel")
+		iconImage.Name = "Icon"
+		iconImage.Size = UDim2.new(0, 40, 0, 40)
+		iconImage.Position = UDim2.new(0, 10, 0, 10)
+		iconImage.BackgroundTransparency = 1
+		iconImage.Image = icon
+		iconImage.Parent = notificationFrame
+	end
+	
+	-- Tiêu đề thông báo
+	local titleLabel = Instance.new("TextLabel")
+	titleLabel.Name = "Title"
+	titleLabel.Size = UDim2.new(1, icon and -60 or -20, 0, 20)
+	titleLabel.Position = UDim2.new(0, icon and 60 or 10, 0, 10)
+	titleLabel.BackgroundTransparency = 1
+	titleLabel.Text = title or "Thông báo"
+	titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+	titleLabel.Font = Enum.Font.GothamBold
+	titleLabel.TextSize = 14
+	titleLabel.Parent = notificationFrame
+	
+	-- Nội dung thông báo
+	local messageLabel = Instance.new("TextLabel")
+	messageLabel.Name = "Message"
+	messageLabel.Size = UDim2.new(1, icon and -60 or -20, 1, -40)
+	messageLabel.Position = UDim2.new(0, icon and 60 or 10, 0, 35)
+	messageLabel.BackgroundTransparency = 1
+	messageLabel.Text = message or "Nội dung thông báo"
+	messageLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+	messageLabel.TextXAlignment = Enum.TextXAlignment.Left
+	messageLabel.TextYAlignment = Enum.TextYAlignment.Top
+	messageLabel.Font = Enum.Font.Gotham
+	messageLabel.TextSize = 12
+	messageLabel.TextWrapped = true
+	messageLabel.Parent = notificationFrame
+	
+	-- Thanh tiến trình thời gian
+	local progressBar = Instance.new("Frame")
+	progressBar.Name = "ProgressBar"
+	progressBar.Size = UDim2.new(1, 0, 0, 2)
+	progressBar.Position = UDim2.new(0, 0, 1, -2)
+	progressBar.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+	progressBar.BorderSizePixel = 0
+	progressBar.Parent = notificationFrame
+	
+	local progressCorner = Instance.new("UICorner")
+	progressCorner.CornerRadius = UDim.new(0, 1)
+	progressCorner.Parent = progressBar
+	
+	-- Nút đóng
+	local closeButton = Instance.new("TextButton")
+	closeButton.Name = "CloseButton"
+	closeButton.Size = UDim2.new(0, 20, 0, 20)
+	closeButton.Position = UDim2.new(1, -25, 0, 5)
+	closeButton.BackgroundTransparency = 1
+	closeButton.Text = "✕"
+	closeButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+	closeButton.TextSize = 12
+	closeButton.Font = Enum.Font.Gotham
+	closeButton.Parent = notificationFrame
+	
+	-- Hiệu ứng hover cho nút đóng
+	closeButton.MouseEnter:Connect(function()
+		closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+	
+	closeButton.MouseLeave:Connect(function()
+		closeButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+	end)
+	
+	-- Di chuyển thông báo vào màn hình
+	local slideIn = TweenService:Create(
+		notificationFrame,
+		TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+		{Position = UDim2.new(1, -10, 1, -110)}
+	)
+	
+	slideIn:Play()
+	
+	-- Hàm đóng thông báo
+	local function closeNotification()
+		local slideOut = TweenService:Create(
+			notificationFrame,
+			TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{Position = UDim2.new(1, 10, 1, -110)}
+		)
+		
+		slideOut:Play()
+		slideOut.Completed:Wait()
+		notificationFrame:Destroy()
+	end
+	
+	-- Sự kiện đóng khi nhấn nút
+	closeButton.MouseButton1Click:Connect(closeNotification)
+	
+	-- Tự động đóng sau thời gian chỉ định
+	local progressTween = TweenService:Create(
+		progressBar,
+		TweenInfo.new(duration, Enum.EasingStyle.Linear),
+		{Size = UDim2.new(0, 0, 0, 2)}
+	)
+	
+	progressTween:Play()
+	
+	delay(duration, closeNotification)
+	
+	return notificationFrame
+end
+
+-- Ví dụ sử dụng:
+-- Tạo thông báo khi script được load
+wait(2)
+
+-- Thông báo 1: Thông báo đơn giản
+createNotification("Roblox", "Chào mừng đến với thông báo kiểu Windows 11!", 5)
+
+wait(3)
+
+-- Thông báo 2: Thông báo với biểu tượng
+createNotification("Hệ thống", "Kết nối thành công với máy chủ!", 4, "rbxassetid://123456789") -- Thay ID bằng ID hình ảnh thực tế
+
+wait(4)
+
+-- Thông báo 3: Thông báo dài hơn
+createNotification("Trò chơi", "Bạn đã nhận được phần thưởng hàng ngày! Hãy kiểm tra kho đồ của bạn.", 6)
+
+-- Xuất hàm để sử dụng ở nơi khác
+return createNotification
