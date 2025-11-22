@@ -24,9 +24,9 @@ local ProtectGui = protectgui or (syn and syn.protect_gui) or function() end
 
 local Themes = {
 	Names = {
+		"Ziram",
 		"Dark",
 		"Darker", 
-		"AMOLED",
 		"Light",
 		"Balloon",
 		"SoftCream",
@@ -43,6 +43,44 @@ local Themes = {
 		"Grape",
 		"Bloody",
 		"Arctic"
+	},
+	Ziram = {
+		Name = "Ziram",
+		Accent = Color3.fromRGB(255, 255, 255),
+		AcrylicMain = Color3.fromRGB(0, 0, 0),
+		AcrylicBorder = Color3.fromRGB(20, 20, 20),
+		AcrylicGradient = ColorSequence.new(Color3.fromRGB(0, 0, 0), Color3.fromRGB(0, 0, 0)),
+		AcrylicNoise = 1,
+		TitleBarLine = Color3.fromRGB(25, 25, 25),
+		Tab = Color3.fromRGB(40, 40, 40),
+		Element = Color3.fromRGB(15, 15, 15),
+		ElementBorder = Color3.fromRGB(0, 0, 0),
+		InElementBorder = Color3.fromRGB(40, 40, 40),
+		ElementTransparency = 0.95,
+		ToggleSlider = Color3.fromRGB(40, 40, 40),
+		ToggleToggled = Color3.fromRGB(255, 255, 255),
+		SliderRail = Color3.fromRGB(40, 40, 40),
+		DropdownFrame = Color3.fromRGB(20, 20, 20),
+		DropdownHolder = Color3.fromRGB(0, 0, 0),
+		DropdownBorder = Color3.fromRGB(0, 0, 0),
+		DropdownOption = Color3.fromRGB(40, 40, 40),
+		Keybind = Color3.fromRGB(40, 40, 40),
+		Input = Color3.fromRGB(40, 40, 40),
+		InputFocused = Color3.fromRGB(0, 0, 0),
+		InputIndicator = Color3.fromRGB(60, 60, 60),
+		InputIndicatorFocus = Color3.fromRGB(255, 255, 255),
+		Dialog = Color3.fromRGB(0, 0, 0),
+		DialogHolder = Color3.fromRGB(0, 0, 0),
+		DialogHolderLine = Color3.fromRGB(20, 20, 20),
+		DialogButton = Color3.fromRGB(15, 15, 15),
+		DialogButtonBorder = Color3.fromRGB(30, 30, 30),
+		DialogBorder = Color3.fromRGB(27, 27, 27),
+		DialogInput = Color3.fromRGB(15, 15, 15),
+		DialogInputLine = Color3.fromRGB(60, 60, 60),
+		Text = Color3.fromRGB(255, 255, 255),
+		SubText = Color3.fromRGB(170, 170, 170),
+		Hover = Color3.fromRGB(40, 40, 40),
+		HoverChange = 0.04
 	},
 	Dark = {
 		Name = "Dark",
@@ -105,44 +143,6 @@ local Themes = {
 		DialogBorder = Color3.fromRGB(50, 50, 50),
 		DialogInput = Color3.fromRGB(45, 45, 45),
 		DialogInputLine = Color3.fromRGB(120, 120, 120),
-	},
-	AMOLED = {
-		Name = "AMOLED",
-		Accent = Color3.fromRGB(255, 255, 255),
-		AcrylicMain = Color3.fromRGB(0, 0, 0),
-		AcrylicBorder = Color3.fromRGB(20, 20, 20),
-		AcrylicGradient = ColorSequence.new(Color3.fromRGB(0, 0, 0), Color3.fromRGB(0, 0, 0)),
-		AcrylicNoise = 1,
-		TitleBarLine = Color3.fromRGB(25, 25, 25),
-		Tab = Color3.fromRGB(40, 40, 40),
-		Element = Color3.fromRGB(15, 15, 15),
-		ElementBorder = Color3.fromRGB(0, 0, 0),
-		InElementBorder = Color3.fromRGB(40, 40, 40),
-		ElementTransparency = 0.95,
-		ToggleSlider = Color3.fromRGB(40, 40, 40),
-		ToggleToggled = Color3.fromRGB(255, 255, 255),
-		SliderRail = Color3.fromRGB(40, 40, 40),
-		DropdownFrame = Color3.fromRGB(20, 20, 20),
-		DropdownHolder = Color3.fromRGB(0, 0, 0),
-		DropdownBorder = Color3.fromRGB(0, 0, 0),
-		DropdownOption = Color3.fromRGB(40, 40, 40),
-		Keybind = Color3.fromRGB(40, 40, 40),
-		Input = Color3.fromRGB(40, 40, 40),
-		InputFocused = Color3.fromRGB(0, 0, 0),
-		InputIndicator = Color3.fromRGB(60, 60, 60),
-		InputIndicatorFocus = Color3.fromRGB(255, 255, 255),
-		Dialog = Color3.fromRGB(0, 0, 0),
-		DialogHolder = Color3.fromRGB(0, 0, 0),
-		DialogHolderLine = Color3.fromRGB(20, 20, 20),
-		DialogButton = Color3.fromRGB(15, 15, 15),
-		DialogButtonBorder = Color3.fromRGB(30, 30, 30),
-		DialogBorder = Color3.fromRGB(27, 27, 27),
-		DialogInput = Color3.fromRGB(15, 15, 15),
-		DialogInputLine = Color3.fromRGB(60, 60, 60),
-		Text = Color3.fromRGB(255, 255, 255),
-		SubText = Color3.fromRGB(170, 170, 170),
-		Hover = Color3.fromRGB(40, 40, 40),
-		HoverChange = 0.04
 	},
 	Light = {
 		Name = "Light",
@@ -2564,6 +2564,8 @@ Components.Tab = (function()
 		Containers = {},
 		SelectedTab = 0,
 		TabCount = 0,
+		AnimationTask = nil,
+		CurrentAnimationTab = 0,
 	}
 
 	function TabModule:Init(Window)
@@ -2653,11 +2655,20 @@ Components.Tab = (function()
 			SortOrder = Enum.SortOrder.LayoutOrder,
 		})
 
+		Tab.ContainerAnim = New("CanvasGroup", {
+			Size = UDim2.fromScale(1, 1),
+			BackgroundTransparency = 1,
+			GroupTransparency = 0,
+			Parent = Window.ContainerHolder,
+			Visible = false,
+			Position = UDim2.fromOffset(0, 0),
+		})
+
 		Tab.ContainerFrame = New("ScrollingFrame", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
-			Parent = Window.ContainerHolder,
-			Visible = false,
+			Parent = Tab.ContainerAnim,
+			Visible = true,
 			BottomImage = "rbxassetid://6889812791",
 			MidImage = "rbxassetid://6889812721",
 			TopImage = "rbxassetid://6276641225",
@@ -2677,6 +2688,21 @@ Components.Tab = (function()
 				PaddingBottom = UDim.new(0, 1),
 			}),
 		})
+
+		Tab.ContainerXMotor = Flipper.SingleMotor.new(0)
+		Tab.ContainerTransparencyMotor = Flipper.SingleMotor.new(0)
+
+		Tab.ContainerXMotor:onStep(function(Value)
+			if Tab.ContainerAnim and Tab.ContainerAnim.Parent then
+				Tab.ContainerAnim.Position = UDim2.fromOffset(Value, 0)
+			end
+		end)
+
+		Tab.ContainerTransparencyMotor:onStep(function(Value)
+			if Tab.ContainerAnim and Tab.ContainerAnim.Parent then
+				Tab.ContainerAnim.GroupTransparency = Value
+			end
+		end)
 
 		Creator.AddSignal(ContainerLayout:GetPropertyChangedSignal("AbsoluteContentSize"), function()
 			Tab.ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 2)
@@ -2700,14 +2726,401 @@ Components.Tab = (function()
 			TabModule:SelectTab(TabIndex)
 		end)
 
-		TabModule.Containers[TabIndex] = Tab.ContainerFrame
+		TabModule.Containers[TabIndex] = Tab.ContainerAnim
 		TabModule.Tabs[TabIndex] = Tab
 
 		Tab.Container = Tab.ContainerFrame
 		Tab.ScrollFrame = Tab.Container
 
+		Tab.SubTabs = {}
+		Tab.SubTabContainers = {}
+		Tab.SelectedSubTab = 0
+		Tab.SubTabCount = 0
+		Tab.SubTabHolder = nil
+
+		function Tab:AddSubTab(Title, Icon)
+			self.SubTabCount = self.SubTabCount + 1
+			local SubTabIndex = self.SubTabCount
+
+			if not self.SubTabHolder then
+				local SubTabListLayout = New("UIListLayout", {
+					Padding = UDim.new(0, 6),
+					FillDirection = Enum.FillDirection.Horizontal,
+					SortOrder = Enum.SortOrder.LayoutOrder,
+					VerticalAlignment = Enum.VerticalAlignment.Center,
+				})
+
+				self.SubTabHolder = New("ScrollingFrame", {
+					Size = UDim2.new(1, -20, 0, 40),
+					Position = UDim2.fromOffset(1, 8),
+					BackgroundTransparency = 1,
+					Parent = self.ContainerFrame,
+					ScrollingDirection = Enum.ScrollingDirection.X,
+					ScrollBarThickness = 0,
+					ScrollBarImageTransparency = 1,
+					ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255),
+					CanvasSize = UDim2.fromScale(0, 1),
+					BorderSizePixel = 0,
+				}, {
+					SubTabListLayout,
+					New("UIPadding", {
+						PaddingLeft = UDim.new(0, 0),
+						PaddingRight = UDim.new(0, 0),
+						PaddingTop = UDim.new(0, 0),
+						PaddingBottom = UDim.new(0, 0),
+					}),
+				})
+
+				Creator.AddSignal(SubTabListLayout:GetPropertyChangedSignal("AbsoluteContentSize"), function()
+					self.SubTabHolder.CanvasSize = UDim2.new(0, SubTabListLayout.AbsoluteContentSize.X, 0, 40)
+				end)
+
+				local SubTabContainerHolder = New("Frame", {
+					Size = UDim2.new(1, -11, 1, -56),
+					Position = UDim2.fromOffset(1, 48),
+					BackgroundTransparency = 1,
+					ClipsDescendants = true,
+					Parent = self.ContainerFrame,
+				})
+
+				self.SubTabContainerHolder = SubTabContainerHolder
+			end
+
+			local SubTabIcon = Icon
+			if not fischbypass then 
+				if Library:GetIcon(Icon) then
+					SubTabIcon = Library:GetIcon(Icon)
+				end
+
+				if SubTabIcon == "" or nil then
+					SubTabIcon = nil
+				end
+			end
+
+			local SubTabButton = New("TextButton", {
+				Size = UDim2.new(0, 0, 0, 32),
+				AutomaticSize = Enum.AutomaticSize.X,
+				BackgroundTransparency = 0.92,
+				Parent = self.SubTabHolder,
+				Text = "",
+				ThemeTag = {
+					BackgroundColor3 = "Tab",
+				},
+			}, {
+				New("UICorner", {
+					CornerRadius = UDim.new(0, 6),
+				}),
+				New("UIStroke", {
+					Transparency = 1,
+					Thickness = 1,
+					ThemeTag = {
+						Color = "Accent",
+					},
+				}),
+				New("UIListLayout", {
+					Padding = UDim.new(0, 6),
+					FillDirection = Enum.FillDirection.Horizontal,
+					SortOrder = Enum.SortOrder.LayoutOrder,
+					VerticalAlignment = Enum.VerticalAlignment.Center,
+					HorizontalAlignment = Enum.HorizontalAlignment.Center,
+				}),
+				New("UIPadding", {
+					PaddingLeft = UDim.new(0, 12),
+					PaddingRight = UDim.new(0, 12),
+					PaddingTop = UDim.new(0, 6),
+					PaddingBottom = UDim.new(0, 6),
+				}),
+				SubTabIcon and New("ImageLabel", {
+					Size = UDim2.fromOffset(16, 16),
+					BackgroundTransparency = 1,
+					Image = SubTabIcon,
+					LayoutOrder = 1,
+					ThemeTag = {
+						ImageColor3 = "Text",
+					},
+				}) or nil,
+				New("TextLabel", {
+					Text = Title,
+					RichText = true,
+					TextColor3 = Color3.fromRGB(255, 255, 255),
+					TextTransparency = 0,
+					FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+					TextSize = 12,
+					TextXAlignment = "Left",
+					TextYAlignment = "Center",
+					Size = UDim2.new(0, 0, 1, 0),
+					AutomaticSize = Enum.AutomaticSize.X,
+					BackgroundTransparency = 1,
+					LayoutOrder = 2,
+					ThemeTag = {
+						TextColor3 = "Text",
+					},
+				}),
+			})
+
+			local SubTabContainerAnim = New("CanvasGroup", {
+				Size = UDim2.fromScale(1, 1),
+				BackgroundTransparency = 1,
+				GroupTransparency = 0,
+				Parent = self.SubTabContainerHolder,
+				Visible = false,
+				Position = UDim2.fromOffset(0, 0),
+			})
+
+			local SubTabContainer = New("ScrollingFrame", {
+				Size = UDim2.fromScale(1, 1),
+				BackgroundTransparency = 1,
+				Parent = SubTabContainerAnim,
+				Visible = true,
+				BottomImage = "rbxassetid://6889812791",
+				MidImage = "rbxassetid://6889812721",
+				TopImage = "rbxassetid://6276641225",
+				ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255),
+				ScrollBarImageTransparency = 0.95,
+				ScrollBarThickness = 3,
+				BorderSizePixel = 0,
+				CanvasSize = UDim2.fromScale(0, 0),
+				ScrollingDirection = Enum.ScrollingDirection.Y,
+				ScrollingEnabled = true,
+			}, {
+				New("UIListLayout", {
+					Padding = UDim.new(0, 5),
+					SortOrder = Enum.SortOrder.LayoutOrder,
+				}),
+				New("UIPadding", {
+					PaddingRight = UDim.new(0, 10),
+					PaddingLeft = UDim.new(0, 1),
+					PaddingTop = UDim.new(0, 1),
+					PaddingBottom = UDim.new(0, 1),
+				}),
+			})
+
+			local SubTabLayout = SubTabContainer:FindFirstChild("UIListLayout")
+			Creator.AddSignal(SubTabLayout:GetPropertyChangedSignal("AbsoluteContentSize"), function()
+				SubTabContainer.CanvasSize = UDim2.new(0, 0, 0, SubTabLayout.AbsoluteContentSize.Y + 2)
+			end)
+
+			local SubTabXMotor = Flipper.SingleMotor.new(0)
+			local SubTabTransparencyMotor = Flipper.SingleMotor.new(0)
+
+			SubTabXMotor:onStep(function(Value)
+				if SubTabContainerAnim and SubTabContainerAnim.Parent then
+					SubTabContainerAnim.Position = UDim2.fromOffset(Value, 0)
+				end
+			end)
+
+			SubTabTransparencyMotor:onStep(function(Value)
+				if SubTabContainerAnim and SubTabContainerAnim.Parent then
+					SubTabContainerAnim.GroupTransparency = Value
+				end
+			end)
+
+			local SubTabMotor, SubTabSetTransparency = Creator.SpringMotor(0.92, SubTabButton, "BackgroundTransparency")
+			local SubTabStroke = SubTabButton:FindFirstChild("UIStroke")
+
+			local function UpdateSubTabAppearance()
+				if self.SelectedSubTab == SubTabIndex then
+					SubTabSetTransparency(0.75)
+					if SubTabStroke then
+						SubTabStroke.Transparency = 0
+					end
+				else
+					SubTabSetTransparency(0.92)
+					if SubTabStroke then
+						SubTabStroke.Transparency = 1
+					end
+				end
+			end
+
+			Creator.AddSignal(SubTabButton.MouseEnter, function()
+				if self.SelectedSubTab ~= SubTabIndex then
+					SubTabSetTransparency(0.87)
+				end
+			end)
+
+			Creator.AddSignal(SubTabButton.MouseLeave, function()
+				UpdateSubTabAppearance()
+			end)
+
+			Creator.AddSignal(SubTabButton.MouseButton1Down, function()
+				SubTabSetTransparency(0.92)
+			end)
+
+			Creator.AddSignal(SubTabButton.MouseButton1Up, function()
+				UpdateSubTabAppearance()
+			end)
+
+			UpdateSubTabAppearance()
+
+			Creator.AddSignal(SubTabButton.MouseButton1Click, function()
+				self:SelectSubTab(SubTabIndex)
+			end)
+
+			local SubTab = {
+				Type = "SubTab",
+				Name = Title,
+				Button = SubTabButton,
+				Container = SubTabContainer,
+				ContainerAnim = SubTabContainerAnim,
+				XMotor = SubTabXMotor,
+				TransparencyMotor = SubTabTransparencyMotor,
+				SetTransparency = SubTabSetTransparency,
+				Selected = false,
+			}
+
+			self.SubTabs[SubTabIndex] = SubTab
+			self.SubTabContainers[SubTabIndex] = SubTabContainerAnim
+
+			if self.SubTabCount == 1 then
+				self:SelectSubTab(SubTabIndex)
+			end
+
+			function SubTab:AddSection(SectionTitle, SectionIcon)
+				local Section = { Type = "Section" }
+
+				local Icon = SectionIcon
+				if not fischbypass then 
+					if Library:GetIcon(Icon) then
+						Icon = Library:GetIcon(Icon)
+					end
+
+					if Icon == "" or nil then
+						Icon = nil
+					end
+				end
+
+				local SectionFrame = Components.Section(SectionTitle, SubTab.Container, Icon)
+				Section.Container = SectionFrame.Container
+				Section.ScrollFrame = SubTab.Container
+
+				setmetatable(Section, Elements)
+				return Section
+			end
+
+			setmetatable(SubTab, Elements)
+			return SubTab
+		end
+
+		function Tab:SelectSubTab(SubTabIndex)
+			if self.SelectedSubTab == SubTabIndex then
+				return
+			end
+
+			local PreviousSubTab = self.SelectedSubTab
+			local Direction = (PreviousSubTab > 0 and SubTabIndex > PreviousSubTab) and 1 or -1
+			if PreviousSubTab == 0 then
+				Direction = 0
+			end
+
+			local ContainerSize = self.SubTabContainerHolder and self.SubTabContainerHolder.AbsoluteSize.X or 500
+			local SlideDistance = math.min(ContainerSize * 0.15, 60)
+
+			self.SelectedSubTab = SubTabIndex
+
+			for idx, SubTabObj in next, self.SubTabs do
+				SubTabObj.Selected = (idx == SubTabIndex)
+				local SubTabStroke = SubTabObj.Button:FindFirstChild("UIStroke")
+				if idx == SubTabIndex then
+					SubTabObj.SetTransparency(0.75)
+					if SubTabStroke then
+						SubTabStroke.Transparency = 0
+					end
+				else
+					SubTabObj.SetTransparency(0.92)
+					if SubTabStroke then
+						SubTabStroke.Transparency = 1
+					end
+				end
+			end
+
+			if PreviousSubTab > 0 and PreviousSubTab ~= SubTabIndex and self.SubTabs[PreviousSubTab] and self.SubTabs[SubTabIndex] then
+				local OldContainer = self.SubTabs[PreviousSubTab].ContainerAnim
+				local NewContainer = self.SubTabs[SubTabIndex].ContainerAnim
+				local OldSubTab = self.SubTabs[PreviousSubTab]
+				local NewSubTab = self.SubTabs[SubTabIndex]
+
+				for idx, Container in next, self.SubTabContainers do
+					if Container and idx ~= PreviousSubTab and idx ~= SubTabIndex then
+						Container.Visible = false
+						Container.Position = UDim2.fromOffset(0, 0)
+						Container.GroupTransparency = 0
+						if self.SubTabs[idx] then
+							pcall(function()
+								self.SubTabs[idx].XMotor:setGoal(Instant(0))
+								self.SubTabs[idx].TransparencyMotor:setGoal(Instant(0))
+							end)
+						end
+					end
+				end
+
+				OldContainer.Visible = true
+				OldContainer.Position = UDim2.fromOffset(0, 0)
+				OldContainer.GroupTransparency = 0
+				pcall(function()
+					OldSubTab.XMotor:setGoal(Instant(0))
+					OldSubTab.TransparencyMotor:setGoal(Instant(0))
+				end)
+
+				NewContainer.Visible = true
+				NewContainer.Position = UDim2.fromOffset(Direction * SlideDistance, 0)
+				NewContainer.GroupTransparency = 1
+				pcall(function()
+					NewSubTab.XMotor:setGoal(Instant(Direction * SlideDistance))
+					NewSubTab.TransparencyMotor:setGoal(Instant(1))
+				end)
+
+				task.wait()
+
+				pcall(function()
+					OldSubTab.XMotor:setGoal(Spring(-Direction * SlideDistance, { frequency = 4, dampingRatio = 0.7 }))
+					OldSubTab.TransparencyMotor:setGoal(Spring(1, { frequency = 4, dampingRatio = 0.7 }))
+				end)
+
+				pcall(function()
+					NewSubTab.XMotor:setGoal(Spring(0, { frequency = 4, dampingRatio = 0.7 }))
+					NewSubTab.TransparencyMotor:setGoal(Spring(0, { frequency = 4, dampingRatio = 0.7 }))
+				end)
+
+				task.spawn(function()
+					task.wait(0.5)
+					if self.SelectedSubTab == SubTabIndex and self.SubTabs[PreviousSubTab] then
+						local OldContainer = self.SubTabs[PreviousSubTab].ContainerAnim
+						local OldSubTab = self.SubTabs[PreviousSubTab]
+						if OldContainer and OldContainer.Parent then
+							OldContainer.Visible = false
+							OldContainer.Position = UDim2.fromOffset(0, 0)
+							OldContainer.GroupTransparency = 0
+						end
+						if OldSubTab and OldSubTab.XMotor and OldSubTab.TransparencyMotor then
+							pcall(function()
+								OldSubTab.XMotor:setGoal(Instant(0))
+								OldSubTab.TransparencyMotor:setGoal(Instant(0))
+							end)
+						end
+					end
+				end)
+			else
+				for idx, Container in next, self.SubTabContainers do
+					if Container then
+						Container.Visible = (idx == SubTabIndex)
+						Container.Position = UDim2.fromOffset(0, 0)
+						Container.GroupTransparency = 0
+						if self.SubTabs[idx] then
+							pcall(function()
+								self.SubTabs[idx].XMotor:setGoal(Instant(0))
+								self.SubTabs[idx].TransparencyMotor:setGoal(Instant(0))
+							end)
+						end
+					end
+				end
+			end
+		end
 
 		function Tab:AddSection(SectionTitle, SectionIcon)
+			if self.SelectedSubTab > 0 and self.SubTabs[self.SelectedSubTab] then
+				return self.SubTabs[self.SelectedSubTab]:AddSection(SectionTitle, SectionIcon)
+			end
+
 			local Section = { Type = "Section" }
 
 			local Icon = SectionIcon
@@ -2738,9 +3151,24 @@ Components.Tab = (function()
 			return
 		end
 		
+		if TabModule.AnimationTask then
+			task.cancel(TabModule.AnimationTask)
+			TabModule.AnimationTask = nil
+		end
+
 		local Window = TabModule.Window
+		local PreviousTab = TabModule.SelectedTab
+		
+		local Direction = (PreviousTab > 0 and Tab > PreviousTab) and 1 or -1
+		if PreviousTab == 0 then
+			Direction = 0
+		end
+		
+		local ContainerSize = Window.ContainerHolder and Window.ContainerHolder.AbsoluteSize.X or (Window.ContainerCanvas and Window.ContainerCanvas.AbsoluteSize.X or 500)
+		local SlideDistance = math.min(ContainerSize * 0.15, 60)
 
 		TabModule.SelectedTab = Tab
+		TabModule.CurrentAnimationTab = Tab
 
 		for _, TabObject in next, TabModule.Tabs do
 			TabObject.SetTransparency(0.92)
@@ -2749,25 +3177,102 @@ Components.Tab = (function()
 		TabModule.Tabs[Tab].SetTransparency(0.89)
 		TabModule.Tabs[Tab].Selected = true
 
-
 		Window.TabDisplay.Text = TabModule.Tabs[Tab].Name
 		Window.SelectorPosMotor:setGoal(Spring(TabModule:GetCurrentTabPos(), { frequency = 6 }))
 
-		task.spawn(function()
-			Window.ContainerHolder.Parent = Window.ContainerAnim
+		if PreviousTab > 0 and PreviousTab ~= Tab and TabModule.Tabs[PreviousTab] and TabModule.Tabs[Tab] then
+			local OldContainer = TabModule.Tabs[PreviousTab].ContainerAnim
+			local NewContainer = TabModule.Tabs[Tab].ContainerAnim
+			local OldTab = TabModule.Tabs[PreviousTab]
+			local NewTab = TabModule.Tabs[Tab]
 
-			Window.ContainerPosMotor:setGoal(Spring(15, { frequency = 10 }))
-			Window.ContainerBackMotor:setGoal(Spring(1, { frequency = 10 }))
-			task.wait(0.12)
-			for _, Container in next, TabModule.Containers do
-				Container.Visible = false
+			if not OldContainer or not NewContainer or not OldTab.ContainerXMotor or not OldTab.ContainerTransparencyMotor or not NewTab.ContainerXMotor or not NewTab.ContainerTransparencyMotor then
+				for idx, Container in next, TabModule.Containers do
+					if Container then
+						Container.Visible = (idx == Tab)
+						Container.Position = UDim2.fromOffset(0, 0)
+						Container.GroupTransparency = 0
+					end
+				end
+				return
 			end
-			TabModule.Containers[Tab].Visible = true
-			Window.ContainerPosMotor:setGoal(Spring(0, { frequency = 5 }))
-			Window.ContainerBackMotor:setGoal(Spring(0, { frequency = 8 }))
-			task.wait(0.12)
-			Window.ContainerHolder.Parent = Window.ContainerCanvas
-		end)
+
+			for idx, Container in next, TabModule.Containers do
+				if Container and idx ~= PreviousTab and idx ~= Tab then
+					Container.Visible = false
+					Container.Position = UDim2.fromOffset(0, 0)
+					Container.GroupTransparency = 0
+					if TabModule.Tabs[idx] and TabModule.Tabs[idx].ContainerXMotor and TabModule.Tabs[idx].ContainerTransparencyMotor then
+						pcall(function()
+							TabModule.Tabs[idx].ContainerXMotor:setGoal(Instant(0))
+							TabModule.Tabs[idx].ContainerTransparencyMotor:setGoal(Instant(0))
+						end)
+					end
+				end
+			end
+
+			OldContainer.Visible = true
+			OldContainer.Position = UDim2.fromOffset(0, 0)
+			OldContainer.GroupTransparency = 0
+			pcall(function()
+				OldTab.ContainerXMotor:setGoal(Instant(0))
+				OldTab.ContainerTransparencyMotor:setGoal(Instant(0))
+			end)
+
+			NewContainer.Visible = true
+			NewContainer.Position = UDim2.fromOffset(Direction * SlideDistance, 0)
+			NewContainer.GroupTransparency = 1
+			pcall(function()
+				NewTab.ContainerXMotor:setGoal(Instant(Direction * SlideDistance))
+				NewTab.ContainerTransparencyMotor:setGoal(Instant(1))
+			end)
+
+			task.wait()
+
+			pcall(function()
+				OldTab.ContainerXMotor:setGoal(Spring(-Direction * SlideDistance, { frequency = 4, dampingRatio = 0.7 }))
+				OldTab.ContainerTransparencyMotor:setGoal(Spring(1, { frequency = 4, dampingRatio = 0.7 }))
+			end)
+
+			pcall(function()
+				NewTab.ContainerXMotor:setGoal(Spring(0, { frequency = 4, dampingRatio = 0.7 }))
+				NewTab.ContainerTransparencyMotor:setGoal(Spring(0, { frequency = 4, dampingRatio = 0.7 }))
+			end)
+
+			TabModule.AnimationTask = task.spawn(function()
+				task.wait(0.5)
+				if TabModule.CurrentAnimationTab == Tab and TabModule.Tabs[PreviousTab] then
+					local OldContainer = TabModule.Tabs[PreviousTab].ContainerAnim
+					local OldTab = TabModule.Tabs[PreviousTab]
+					if OldContainer and OldContainer.Parent then
+						OldContainer.Visible = false
+						OldContainer.Position = UDim2.fromOffset(0, 0)
+						OldContainer.GroupTransparency = 0
+					end
+					if OldTab and OldTab.ContainerXMotor and OldTab.ContainerTransparencyMotor then
+						pcall(function()
+							OldTab.ContainerXMotor:setGoal(Instant(0))
+							OldTab.ContainerTransparencyMotor:setGoal(Instant(0))
+						end)
+					end
+					TabModule.AnimationTask = nil
+				end
+			end)
+		else
+			for idx, Container in next, TabModule.Containers do
+				if Container then
+					Container.Visible = (idx == Tab)
+					Container.Position = UDim2.fromOffset(0, 0)
+					Container.GroupTransparency = 0
+					if TabModule.Tabs[idx] and TabModule.Tabs[idx].ContainerXMotor and TabModule.Tabs[idx].ContainerTransparencyMotor then
+						pcall(function()
+							TabModule.Tabs[idx].ContainerXMotor:setGoal(Instant(0))
+							TabModule.Tabs[idx].ContainerTransparencyMotor:setGoal(Instant(0))
+						end)
+					end
+				end
+			end
+		end
 	end
 
 	return TabModule
@@ -3995,6 +4500,7 @@ Components.Window = (function()
 		Window.ContainerHolder = New("Frame", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
+			ClipsDescendants = true,
 		})
 
 		Window.ContainerAnim = New("CanvasGroup", {
@@ -4006,6 +4512,7 @@ Components.Window = (function()
 			Size = UDim2.new(1, -Window.TabWidth - 32, 1, -102),
 			Position = UDim2.fromOffset(Window.TabWidth + 26, 90),
 			BackgroundTransparency = 1,
+			ClipsDescendants = true,
 		}, {
 			Window.ContainerAnim,
 			Window.ContainerHolder
@@ -4017,6 +4524,12 @@ Components.Window = (function()
 		end
 		Window.BackgroundTransparency = backgroundTransparency
 
+		local backgroundImageTransparency = Config.BackgroundImageTransparency
+		if backgroundImageTransparency == nil then
+			backgroundImageTransparency = backgroundTransparency
+		end
+		Window.BackgroundImageTransparency = backgroundImageTransparency
+
 		local rootChildren = {}
 		
 		if Config.BackgroundImage then
@@ -4026,7 +4539,7 @@ Components.Window = (function()
 				Position = UDim2.fromOffset(0, 0),
 				BackgroundTransparency = 1,
 				Image = Config.BackgroundImage,
-				ImageTransparency = math.max(0, backgroundTransparency),
+				ImageTransparency = math.max(0, math.min(1, backgroundImageTransparency)),
 				ZIndex = 0,
 				ScaleType = Enum.ScaleType.Stretch,
 			}, {
@@ -4038,7 +4551,35 @@ Components.Window = (function()
 			table.insert(rootChildren, BackgroundImageFrame)
 			
 			if Window.AcrylicPaint and Window.AcrylicPaint.Frame then
-				Window.AcrylicPaint.Frame.BackgroundTransparency = 0.98
+				if backgroundImageTransparency <= 0.1 then
+					Window.AcrylicPaint.Frame.BackgroundTransparency = 1
+					if Window.AcrylicPaint.Model then
+						Window.AcrylicPaint.Model.Transparency = 1
+					end
+					local function makeTransparent(obj)
+						if obj:IsA("Frame") then
+							obj.BackgroundTransparency = 1
+						elseif obj:IsA("ImageLabel") then
+							obj.ImageTransparency = 1
+						end
+						for _, child in ipairs(obj:GetChildren()) do
+							if not child:IsA("UICorner") and not child:IsA("UIGradient") and not child:IsA("UIStroke") and not child:IsA("UIListLayout") and not child:IsA("UIPadding") then
+								makeTransparent(child)
+							end
+						end
+					end
+					makeTransparent(Window.AcrylicPaint.Frame)
+				elseif backgroundImageTransparency < 0.3 then
+					Window.AcrylicPaint.Frame.BackgroundTransparency = 0.99
+					if Window.AcrylicPaint.Model then
+						Window.AcrylicPaint.Model.Transparency = 0.99
+					end
+				else
+					Window.AcrylicPaint.Frame.BackgroundTransparency = 0.98
+					if Window.AcrylicPaint.Model then
+						Window.AcrylicPaint.Model.Transparency = 0.98
+					end
+				end
 			end
 		end
 		
@@ -4201,6 +4742,7 @@ Components.Window = (function()
 		Window.SelectorSizeMotor = Flipper.SingleMotor.new(0)
 		Window.ContainerBackMotor = Flipper.SingleMotor.new(0)
 		Window.ContainerPosMotor = Flipper.SingleMotor.new(94)
+		Window.ContainerXMotor = Flipper.SingleMotor.new(0)
 
 		SizeMotor:onStep(function(values)
 			task.wait(_G.CDDrag / 10)
@@ -4275,8 +4817,23 @@ Components.Window = (function()
 			Window.ContainerAnim.GroupTransparency = Value
 		end)
 
+		local ContainerXValue = 0
+		local ContainerYValue = 94
+
+		local function UpdateContainerPosition()
+			if Window.ContainerAnim then
+				Window.ContainerAnim.Position = UDim2.fromOffset(ContainerXValue, ContainerYValue)
+			end
+		end
+
 		Window.ContainerPosMotor:onStep(function(Value)
-			Window.ContainerAnim.Position = UDim2.fromOffset(0, Value)
+			ContainerYValue = Value
+			UpdateContainerPosition()
+		end)
+
+		Window.ContainerXMotor:onStep(function(Value)
+			ContainerXValue = Value
+			UpdateContainerPosition()
 		end)
 
 		local OldSizeX
@@ -4487,15 +5044,16 @@ Components.Window = (function()
 			Window.Root:Destroy()
 		end
 
-		function Window:SetBackgroundImage(imageUrl)
+		function Window:SetBackgroundImage(imageUrl, imageTransparency)
 			if not Window.BackgroundImage then
+				local imgTransparency = imageTransparency or Window.BackgroundImageTransparency or Window.BackgroundTransparency or 0.5
 				local BackgroundImageFrame = New("ImageLabel", {
 					Name = "BackgroundImage",
 					Size = UDim2.fromScale(1, 1),
 					Position = UDim2.fromOffset(0, 0),
 					BackgroundTransparency = 1,
 					Image = imageUrl,
-					ImageTransparency = math.max(0, Window.BackgroundTransparency or 0.5),
+					ImageTransparency = math.max(0, math.min(1, imgTransparency)),
 					ZIndex = 0,
 					ScaleType = Enum.ScaleType.Stretch,
 					Parent = Window.Root,
@@ -4505,17 +5063,60 @@ Components.Window = (function()
 					}),
 				})
 				Window.BackgroundImage = BackgroundImageFrame
+				if imageTransparency ~= nil then
+					Window.BackgroundImageTransparency = imageTransparency
+				end
 			else
 				Window.BackgroundImage.Image = imageUrl
 				Window.BackgroundImage.ScaleType = Enum.ScaleType.Stretch
+				if imageTransparency ~= nil then
+					Window.BackgroundImageTransparency = imageTransparency
+					Window.BackgroundImage.ImageTransparency = math.max(0, math.min(1, imageTransparency))
+				end
 			end
 		end
 
 		function Window:SetBackgroundTransparency(transparency)
 			transparency = transparency or 0.5
 			Window.BackgroundTransparency = transparency
+		end
+
+		function Window:SetBackgroundImageTransparency(transparency)
+			transparency = transparency or 0.5
+			Window.BackgroundImageTransparency = transparency
 			if Window.BackgroundImage then
-				Window.BackgroundImage.ImageTransparency = math.max(0, transparency)
+				Window.BackgroundImage.ImageTransparency = math.max(0, math.min(1, transparency))
+			end
+			if Window.AcrylicPaint and Window.AcrylicPaint.Frame then
+				if transparency <= 0.1 then
+					Window.AcrylicPaint.Frame.BackgroundTransparency = 1
+					if Window.AcrylicPaint.Model then
+						Window.AcrylicPaint.Model.Transparency = 1
+					end
+					local function makeTransparent(obj)
+						if obj:IsA("Frame") then
+							obj.BackgroundTransparency = 1
+						elseif obj:IsA("ImageLabel") then
+							obj.ImageTransparency = 1
+						end
+						for _, child in ipairs(obj:GetChildren()) do
+							if not child:IsA("UICorner") and not child:IsA("UIGradient") and not child:IsA("UIStroke") and not child:IsA("UIListLayout") and not child:IsA("UIPadding") then
+								makeTransparent(child)
+							end
+						end
+					end
+					makeTransparent(Window.AcrylicPaint.Frame)
+				elseif transparency < 0.3 then
+					Window.AcrylicPaint.Frame.BackgroundTransparency = 0.99
+					if Window.AcrylicPaint.Model then
+						Window.AcrylicPaint.Model.Transparency = 0.99
+					end
+				else
+					Window.AcrylicPaint.Frame.BackgroundTransparency = 0.98
+					if Window.AcrylicPaint.Model then
+						Window.AcrylicPaint.Model.Transparency = 0.98
+					end
+				end
 			end
 		end
 
@@ -4799,13 +5400,17 @@ ElementsTable.Dropdown = (function()
 			},
 		})
 
+		local initialRotation = 180
+		local openRotation = windowDropdownsOutside and -90 or 0
+		local closeRotation = 180
+
 		local DropdownIco = New("ImageLabel", {
 			Image = "rbxassetid://10709790948",
 			Size = UDim2.fromOffset(16, 16),
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, -8, 0.5, 0),
 			BackgroundTransparency = 1,
-			Rotation = 180,
+			Rotation = initialRotation,
 			ThemeTag = {
 				ImageColor3 = "SubText",
 			},
@@ -5221,18 +5826,18 @@ ElementsTable.Dropdown = (function()
 		Creator.AddSignal(DropdownInner.MouseButton1Click, function()
 			if Dropdown.Opened then
 				Dropdown:Close()
-				return
+			else
+				Dropdown:Open()
 			end
-			Dropdown:Open()
 		end)
 
 		Creator.AddSignal(DropdownInner.InputBegan, function(Input)
 			if Input.UserInputType == Enum.UserInputType.Touch then
 				if Dropdown.Opened then
 					Dropdown:Close()
-					return
+				else
+					Dropdown:Open()
 				end
-				Dropdown:Open()
 			end
 		end)
 
@@ -5251,13 +5856,14 @@ ElementsTable.Dropdown = (function()
 				Input.UserInputType == Enum.UserInputType.MouseButton1
 				or Input.UserInputType == Enum.UserInputType.Touch
 			then
+				local mousePos = Input.UserInputType == Enum.UserInputType.MouseButton1 and Vector2.new(Mouse.X, Mouse.Y) or Input.Position
 				local AbsPos, AbsSize = DropdownHolderFrame.AbsolutePosition, DropdownHolderFrame.AbsoluteSize
-				if
-					Mouse.X < AbsPos.X
-					or Mouse.X > AbsPos.X + AbsSize.X
-					or Mouse.Y < (AbsPos.Y - 20 - 1)
-					or Mouse.Y > AbsPos.Y + AbsSize.Y
-				then
+				local innerAbsPos, innerAbsSize = DropdownInner.AbsolutePosition, DropdownInner.AbsoluteSize
+				
+				local clickedInsideDropdown = mousePos.X >= AbsPos.X and mousePos.X <= AbsPos.X + AbsSize.X and mousePos.Y >= AbsPos.Y and mousePos.Y <= AbsPos.Y + AbsSize.Y
+				local clickedInsideInner = mousePos.X >= innerAbsPos.X and mousePos.X <= innerAbsPos.X + innerAbsSize.X and mousePos.Y >= innerAbsPos.Y and mousePos.Y <= innerAbsPos.Y + innerAbsSize.Y
+				
+				if not clickedInsideDropdown and not clickedInsideInner then
 					Dropdown:Close()
 				end
 			end
@@ -5265,6 +5871,9 @@ ElementsTable.Dropdown = (function()
 
 		local ScrollFrame = self.ScrollFrame
 		function Dropdown:Open()
+			if Dropdown.Opened then
+				return
+			end
 			Dropdown.Opened = true
 			if Dropdown.OpenToRight then
 				Dropdown.SavedY = nil
@@ -5290,7 +5899,7 @@ ElementsTable.Dropdown = (function()
 			TweenService:Create(
 				DropdownIco,
 				TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{ Rotation = 0 }
+				{ Rotation = openRotation }
 			):Play()
 		end
 
@@ -5304,7 +5913,7 @@ ElementsTable.Dropdown = (function()
 			TweenService:Create(
 				DropdownIco,
 				TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{ Rotation = 180 }
+				{ Rotation = closeRotation }
 			):Play()
 			Dropdown:Display()
 			for _, element in next, DropdownScrollFrame:GetChildren() do
@@ -5752,6 +6361,7 @@ ElementsTable.Slider = (function()
 
 		local isHovering = false
 		local inputVisible = false
+		local currentWidthTween = nil
 
 		local function calculateInputWidth(text)
 			local textSize = game:GetService("TextService"):GetTextSize(
@@ -5766,14 +6376,35 @@ ElementsTable.Slider = (function()
 			return math.max(minWidth, math.min(maxWidth, textSize.X + padding))
 		end
 
+		local function updateInputWidth(text, animate)
+			if currentWidthTween then
+				currentWidthTween:Cancel()
+				currentWidthTween = nil
+			end
+
+			local targetWidth = calculateInputWidth(text)
+			local currentWidth = SliderInput.Size.X.Offset
+
+			if animate and math.abs(targetWidth - currentWidth) > 0.5 then
+				currentWidthTween = TweenService:Create(SliderInput, TweenInfo.new(0.15, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+					Size = UDim2.new(0, targetWidth, 0, 14)
+				})
+				currentWidthTween:Play()
+				currentWidthTween.Completed:Connect(function()
+					currentWidthTween = nil
+				end)
+			else
+				SliderInput.Size = UDim2.new(0, targetWidth, 0, 14)
+			end
+		end
+
 		Creator.AddSignal(SliderFrame.Frame.MouseEnter, function()
 			isHovering = true
 			if not SliderInput:IsFocused() then
 				SliderDisplay.Visible = false
 				SliderInput.Text = tostring(Slider.Value)
 
-				local targetWidth = calculateInputWidth(tostring(Slider.Value))
-				SliderInput.Size = UDim2.new(0, targetWidth, 0, 14)
+				updateInputWidth(tostring(Slider.Value), false)
 				inputVisible = true
 
 				local tweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
@@ -5824,11 +6455,11 @@ ElementsTable.Slider = (function()
 
 				if cleanText ~= text then
 					SliderInput.Text = cleanText
+					return
 				end
 
-				if SliderInput.Visible then
-					local targetWidth = calculateInputWidth(cleanText)
-					SliderInput.Size = UDim2.new(0, targetWidth, 0, 14)
+				if inputVisible or SliderInput:IsFocused() then
+					updateInputWidth(cleanText, true)
 				end
 			end
 		end)
@@ -5839,6 +6470,7 @@ ElementsTable.Slider = (function()
 				Slider:SetValue(inputValue)
 			else
 				SliderInput.Text = tostring(Slider.Value)
+				updateInputWidth(tostring(Slider.Value), true)
 			end
 
 			if not isHovering then
@@ -5861,6 +6493,7 @@ ElementsTable.Slider = (function()
 
 		Creator.AddSignal(SliderInput.Focused, function()
 			SliderInput.Text = tostring(Slider.Value)
+			updateInputWidth(tostring(Slider.Value), false)
 		end)
 
 		Creator.AddSignal(SliderInput.InputBegan, function(Input)
@@ -5928,10 +6561,12 @@ ElementsTable.Slider = (function()
 			SliderFill.Size = UDim2.fromScale((self.Value - Slider.Min) / (Slider.Max - Slider.Min), 1)
 			SliderDisplay.Text = tostring(self.Value)
 
-			if SliderInput.Visible then
+			if inputVisible or SliderInput:IsFocused() then
 				SliderInput.Text = tostring(self.Value)
-				local targetWidth = calculateInputWidth(tostring(self.Value))
-				SliderInput.Size = UDim2.new(0, targetWidth, 0, 14)
+				updateInputWidth(tostring(self.Value), not SliderInput:IsFocused())
+			end
+			if not inputVisible and not SliderInput:IsFocused() then
+				SliderInput.Text = tostring(self.Value)
 			end
 
 			Library:SafeCallback(Slider.Callback, self.Value)
@@ -7572,6 +8207,7 @@ local Icons = {
 	["lucide-webhook"] = "rbxassetid://17320556264",
 	["lucide-dumbbell"] = "rbxassetid://18273453053"
 }
+
 function Library:GetIcon(Name)
 	if Name ~= nil and Icons["lucide-" .. Name] then
 		return Icons["lucide-" .. Name]
@@ -9045,6 +9681,9 @@ Library.CreateWindow = function(self, Config)
 		BackgroundTransparency = Config.BackgroundTransparency,
 
 
+		BackgroundImageTransparency = Config.BackgroundImageTransparency,
+
+
 		SubTitle = Config.SubTitle,
 
 
@@ -10434,6 +11073,8 @@ AddSignal(MobileMinimizeButton.MouseButton1Click, function()
 
 
 end)
+
+    
 
 if RunService:IsStudio() then task.wait(0.01) end
 return Library, SaveManager, InterfaceManager, Mobile
