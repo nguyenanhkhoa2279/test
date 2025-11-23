@@ -1,5 +1,3 @@
-Banana
-
 if getgenv().Crystal then 
     if game.CoreGui:FindFirstChild("Crystal Hub GUI") then
         for i, v in ipairs(game.CoreGui:GetChildren()) do
