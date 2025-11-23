@@ -12,7 +12,7 @@ getgenv().Crystal = true
 local DisableAnimation = game.Players.LocalPlayer.PlayerGui:FindFirstChild('TouchGui')
 
 local T1UIColor = {
-	["Border Color"] = Color3.fromRGB(100, 100, 100),
+	["Border Color"] = Color3.fromRGB(0, 0, 0),
 	["Click Effect Color"] = Color3.fromRGB(200, 200, 200),
 	["Setting Icon Color"] = Color3.fromRGB(200, 200, 200),
 	["Logo Image"] = "rbxassetid://135300070242371",
@@ -22,8 +22,8 @@ local T1UIColor = {
 	["Text Color"] = Color3.fromRGB(240, 240, 240),
 	["Placeholder Text Color"] = Color3.fromRGB(150, 150, 150),
 	["Title Text Color"] = Color3.fromRGB(255, 255, 255),
-	["Background Main Color"] = Color3.fromRGB(30, 30, 30),
-	["Background 1 Color"] = Color3.fromRGB(20, 20, 20),
+	["Background Main Color"] = Color3.fromRGB(40, 40, 40),
+	["Background 1 Color"] = Color3.fromRGB(40, 40, 40),
 	["Background 1 Transparency"] = 0.3,
 	["Background 2 Color"] = Color3.fromRGB(50, 50, 50),
 	["Background 3 Color"] = Color3.fromRGB(40, 40, 40),
@@ -373,7 +373,7 @@ local libCreateNoti = function(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-	TextLabelNoti.Text = "<font color=\"rgb(" .. color .. ")\">Nawy Hub</font> " .. getgenv().TitleNameNoti
+	TextLabelNoti.Text = "<font color=\"rgb(" .. color .. ")\">Ziram Hub</font> " .. getgenv().TitleNameNoti
 	
 	TextLabelNoti.Name = "TextLabelNoti"
 	TextLabelNoti.Parent = Topnoti
@@ -481,7 +481,7 @@ end
 
 function Library:CreateWindow(Setting)
 
-	local TitleNameMain =  "Blox Fruit"
+	local TitleNameMain =  "Tabs"
 	getgenv().MainDesc = Setting.Desc or ""
 
 	local djtmemay = false
@@ -534,7 +534,7 @@ function Library:CreateWindow(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-	TextLabelMain.Text = "<font color=\"rgb(" .. color .. ")\">@noguchi.hyuga</font> " .. getgenv().MainDesc or " - Blox Fruit"
+	TextLabelMain.Text = "<font color=\"rgb(" .. color .. ")\">NguyenAnhKhoa2279</font> " .. getgenv().MainDesc or
 
 	MainContainer = Instance.new("ImageLabel")
 	MainContainer.Name = "MainContainer"
