@@ -514,7 +514,7 @@ function Library:CreateWindow(Setting)
 	-- MainContainer
 	local uistr = Instance.new("UIStroke", MainContainer);
 	uistr["Thickness"] = 2;
-	uistr["Color"] = Color3.fromRGB(0, 0, 0);
+	uistr["Color"] = Color3.fromRGB(40, 40, 40);
 	getgenv().ReadyForGuiLoaded = true
 	
 	MainCorner.CornerRadius = UDim.new(0, 4)
