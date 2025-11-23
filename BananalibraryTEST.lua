@@ -1,3 +1,5 @@
+Banana
+
 if getgenv().Crystal then 
     if game.CoreGui:FindFirstChild("Crystal Hub GUI") then
         for i, v in ipairs(game.CoreGui:GetChildren()) do
@@ -514,7 +516,7 @@ function Library:CreateWindow(Setting)
 	-- MainContainer
 	local uistr = Instance.new("UIStroke", MainContainer);
 	uistr["Thickness"] = 2;
-	uistr["Color"] = Color3.fromRGB(171, 171, 255);
+	uistr["Color"] = Color3.fromRGB(0, 0, 0);
 	getgenv().ReadyForGuiLoaded = true
 	
 	MainCorner.CornerRadius = UDim.new(0, 4)
